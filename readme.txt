@@ -2,7 +2,7 @@
 Contributors: alexbenfica,flauius
 Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, produtivity, publish control, schedule post 
 Requires at least: 2.8
-Tested up to: 3.8
+Tested up to: 4.0.1
 Stable tag: trunk
 Donate link: http://www.palpitedigital.com/colabore-donate/
 
@@ -107,9 +107,11 @@ Any other languages... you're welcome! Thank you!
 
 == Changelog ==
 
+= 4.0.02 =
+* Tested up to WordPress 4.0.1
+
 = 4.0.01 =
 * Tested up to WordPress 3.8 
-
 
 = 4.0.00 =
 * As requested, now it is possible to choose how many posts will be scheduled each day. 
