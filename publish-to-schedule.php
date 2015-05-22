@@ -3,9 +3,9 @@
 Plugin Name: Publish to Schedule
 Plugin URI: http://wordpress.org/extend/plugins/publish-to-schedule/ 
 Description: Just write! Let this plugins AUTO-schedule all posts for you! Configure once, use forever!
-Version: 4.0.02
+Version: 4.0.03
 Author: Alex Benfica
-Author URI: http://www.alexbenfica.com/
+Author URI: https://br.linkedin.com/in/alexbenfica
 License: GPL2 
  
 Copyright 2012  Publish to Schedule  (email : alexbenfica@gmail.com)

@@ -2,9 +2,9 @@
 Contributors: alexbenfica,flauius
 Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, produtivity, publish control, schedule post 
 Requires at least: 2.8
-Tested up to: 4.1
+Tested up to: 4.2.2
 Stable tag: trunk
-Donate link: http://www.palpitedigital.com/colabore-donate/
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=N827XSKKL7388&lc=US&item_name=Publish%20to%20Schedule%20Plugin&item_number=publish%2dto%2dschedule&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 
 
 Write and not worry about scheduling posts, keeping the periodicity for your readers and not waste time finding out next date to publish. 
@@ -25,7 +25,6 @@ This information is important as it allow you to manually change the date and ti
 
 It is very simple to use and avoid you to be searching when the last post were published each time you have to schedule a date to a post you are writing. 
 Specially useful if you have multiple blogs and each one have a different post schedule. 
-
 
 Se preferir, veja a **documentação em português** do [plugin para WordPress Publish to Schedule][doc ptbr].
 
