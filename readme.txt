@@ -1,6 +1,6 @@
 === Publish to Schedule ===
 Contributors: alexbenfica,flauius
-Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, produtivity, publish control, schedule post 
+Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, produtivity, publish control, schedule post, autopost, autopublish
 Requires at least: 2.8
 Tested up to: 4.2.2
 Stable tag: trunk
@@ -15,6 +15,14 @@ Write and not worry about scheduling posts, keeping the periodicity for your rea
 With this plugin you don't need to manually choose the date when a post will be published. After a simple configuration the plugin will schedule your posts when you click publish.
 
 Just configure days of week, the number of posts each day and time interval you want posts to be auto scheduled and each post will be automatically scheduled for these days with no more than the number you specified of posts per day. 
+
+You can keep reading this... or you can watch this [spontaneous video][ptsvideo] from Eli The Computer Guy explaining how this free plugin works! 
+Thank you Eli. I'm really happy to know that my plugin is helping many people. You made my day.
+
+[ptsvideo]: https://www.youtube.com/watch?v=mT8zTAtu7lc
+            "Plugin WordPress Publish to Schedule - Video from Eli The Computer Guy"
+
+Now that you have already watched the video... read the rest!
 
 It is useful as readers will have articles with maintain some defined periodicity.
 
@@ -105,6 +113,13 @@ Any other languages... you're welcome! Thank you!
 3. This is what you'll see while write your post: the date that post will be automatically schedule, and why! To see less information change the related option in the plugin configuration.
 
 == Changelog ==
+
+
+= 4.0.04 =
+* Added a video in the description and a new cover and icon.
+
+= 4.0.03 =
+* Tested up to WordPress 4.2.2
 
 = 4.0.02 =
 * Tested up to WordPress 4.0.1
