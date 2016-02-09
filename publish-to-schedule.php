@@ -3,12 +3,12 @@
 Plugin Name: Publish to Schedule
 Plugin URI: http://wordpress.org/extend/plugins/publish-to-schedule/ 
 Description: Just write! Let this plugins AUTO-schedule all posts for you! Configure once, use forever!
-Version: 4.0.04
+Version: 4.0.05
 Author: Alex Benfica
 Author URI: https://br.linkedin.com/in/alexbenfica
 License: GPL2 
  
-Copyright 2012  Publish to Schedule  (email : alexbenfica@gmail.com)
+Copyright 2012-2016  Publish to Schedule  (email : alexbenfica@gmail.com)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as 
@@ -26,8 +26,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
  
-# useful for translating, whrere you can create te .po file from .php file. POedit not working very well...
-#http://www.icanlocalize.com/tools/php_scanner
+# useful for translating, whrere you can createa .po file from .php file. 
+# POedit not working very well...
+# http://www.icanlocalize.com/tools/php_scanner
 # load domains for translations from english...
 load_textdomain('pts', dirname(__FILE__).'/lang/' . get_locale() . '.mo');
 
@@ -880,7 +881,7 @@ $default_options['pts_allowstats'] = 'yes';
 
 
 // the plugin options are stored in the options table under the name of the plugin file sans extension
-add_option(basename(__FILE__, ".php"), $default_options, 'options for the '.$plName.' plugin');
+add_option(basename(__FILE__, ".php"), $default_options);
 
 // This method displays, stores and updates all the options
 function pts_options_page(){
@@ -889,8 +890,6 @@ function pts_options_page(){
 	global $plUrl;
 	global $pts_debug;
 
-
-	
 	# insert Google analytics code to monitor plugin usage.
 	add_action('admin_footer', 'pts_insertAnalyticsCode',12);
 	
@@ -1362,4 +1361,3 @@ add_filter("plugin_action_links_$plugin", 'pts_settings_link' );
 	
 
 
-?>
