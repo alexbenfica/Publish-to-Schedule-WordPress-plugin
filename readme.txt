@@ -1,6 +1,6 @@
 === Publish to Schedule ===
 Contributors: alexbenfica,flauius
-Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, produtivity, publish control, schedule post, autopost, autopublish
+Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, productivity, publish control, schedule post, autopost, autopublish, post later, auto schedule
 Requires at least: 2.8
 Tested up to: 4.4.2
 Stable tag: trunk
@@ -76,7 +76,7 @@ Your post will bu publish in the date you choose. Simple and straightforward!
 
 = How can this help with multiple authors? =
 
-The plugins is simple. It will schedule the post on the moment that publish button get clicked. 
+The plugin is simple. It will schedule the post on the moment that publish button get clicked. 
 So, the author who writes first will have your post published first! Fair enough.. anh?
 
 
@@ -92,12 +92,12 @@ Not yet. But it is already on TODO list.
 
 = Can I ask for changes and new functionalities on this plugin? = 
 
-Yes. You can! I'm availble to talk about this! And I can do other plugins too.
+Yes. You can! I'm available to talk about this! And I can do other plugins too.
 
 = Should I donate? =
 
 You can, if you want. I would like that. Means that my work e valuable for someone else!
-My paypal account for donations is: alexbenfica@gmail.com 
+My Paypal account for donations is: alexbenfica@gmail.com 
 
 = Can I translate it? =
 
@@ -113,6 +113,10 @@ Any other languages... you're welcome! Thank you!
 3. This is what you'll see while write your post: the date that post will be automatically schedule, and why! To see less information change the related option in the plugin configuration.
 
 == Changelog ==
+= 4.0.06 =
+* Added Dutch language. Thanks Stephan van Rooij (@svrooij) for sending me the .po file!
+* Tested up to WordPress 4.7.3
+
 = 4.0.05 =
 * Fixed issue with deprecated WordPress parameter in function add_option.
 * Tested up to WordPress 4.4.2

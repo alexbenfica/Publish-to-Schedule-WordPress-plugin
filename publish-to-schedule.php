@@ -1,14 +1,14 @@
 <?php
 /*
 Plugin Name: Publish to Schedule
-Plugin URI: http://wordpress.org/extend/plugins/publish-to-schedule/ 
+Plugin URI: https://wordpress.org/extend/plugins/publish-to-schedule/ 
 Description: Just write! Let this plugins AUTO-schedule all posts for you! Configure once, use forever!
-Version: 4.0.05
+Version: 4.0.06
 Author: Alex Benfica
 Author URI: https://br.linkedin.com/in/alexbenfica
 License: GPL2 
  
-Copyright 2012-2016  Publish to Schedule  (email : alexbenfica@gmail.com)
+Copyright 2012-2017  Publish to Schedule  (email : alexbenfica@gmail.com)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as 
@@ -34,13 +34,13 @@ load_textdomain('pts', dirname(__FILE__).'/lang/' . get_locale() . '.mo');
 
 
 $plName = 'Publish to Schedule';
-$plUrl = 'http://wordpress.org/extend/plugins/publish-to-schedule/';
+$plUrl = 'https://wordpress.org/extend/plugins/publish-to-schedule/';
 
 
 # activate debug
 $pts_debug = False;
 
-$pts_show_donate = False;
+$pts_show_donate = True;
 
 # url for paypal donation.
 $pts_donateURL = 'https://www.paypal.com/cgi-bin/webscr?business=alexbenfica@gmail.com&cmd=_donations&item_name=PublishToSchedule&no_note=0&lc='
@@ -56,7 +56,7 @@ $pts_donateURL = 'https://www.paypal.com/cgi-bin/webscr?business=alexbenfica@gma
 
 
 #Actions that change post status...
-#http://codex.wordpress.org/Post_Status_Transitions
+#https://codex.wordpress.org/Post_Status_Transitions
 
 #All possible post status in Jan 2012...
 
@@ -92,42 +92,37 @@ foreach($possibleStatus as $status) {
 
 
 # change the name os publish button...
-function pts_change_publish_button( $translation, $text ) {
-	if ( $text == 'Publish' )
-		return __('Pub. to Schedule','pts');
 
-	return $translation;
+function pts_change_publish_button($translation, $text) {
+    if ($text == 'Publish') {
+        return __('Pub. to Schedule', 'pts');
+    }
+    return $translation;
 }
-
-
-
-
-
-
-
 
 # return the actual version of this plugin
-function pts_get_version() {
-	$plugin_data = get_plugin_data( __FILE__ );
-	$plugin_version = $plugin_data['Version'];
-	return $plugin_version;
-}
 
+function pts_get_version() {
+    $plugin_data = get_plugin_data(__FILE__);
+    $plugin_version = $plugin_data['Version'];
+    return $plugin_version;
+}
 
 
 
 
 # insert Google Analytics code to monitor plugin utilization.
-function pts_insertAnalyticsCode($getCode = False){
-	
-	$options = get_option(basename(__FILE__, ".php"));
-	
-	# do not collect statististcs if now allowed... 	
-	if($options['pts_allowstats'] == 'No'){		
-		return '';
-	}
-	
-	$analyticsCode = "<script type=\"text/javascript\">
+
+function pts_insertAnalytics($getCode = False) {
+
+    $options = get_option(basename(__FILE__, ".php"));
+
+    # do not collect statististcs if now allowed... 	
+    if ($options['pts_allowstats'] == 'No') {
+        return '';
+    }
+
+    $analyticsCode = "<script type=\"text/javascript\">
 	var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-28857513-1']);
 		_gaq.push(['_trackPageview']);	
@@ -136,29 +131,18 @@ function pts_insertAnalyticsCode($getCode = False){
 	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	  })();
-		_gaq.push(['_setCustomVar', 1,'Site URL','".get_option('home')."', 1 ]);
-		_gaq.push(['_setCustomVar', 2,'Articles scheduled','".$options['pts_statistics_total_work']."',1]); 	
-		_gaq.push(['_setCustomVar', 3,'WP Language','".get_bloginfo('language')."',1]);
+		_gaq.push(['_setCustomVar', 1,'Site URL','" . get_option('home') . "', 1 ]);
+		_gaq.push(['_setCustomVar', 2,'Articles scheduled','" . $options['pts_statistics_total_work'] . "',1]); 	
+		_gaq.push(['_setCustomVar', 3,'WP Language','" . get_bloginfo('language') . "',1]);
 	</script>";
-	
-	
-	if($getCode){
-		return $analyticsCode;
-	}
-	else{	
-		print $analyticsCode;	
-	}
+
+
+    if ($getCode) {
+        return $analyticsCode;
+    } else {
+        print $analyticsCode;
+    }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -258,7 +242,7 @@ function pts_donateHTMLButton($url){
 	<div 
 	style="
 	background-color:#FFD879;
-	height:16px;
+	height:22px;
 	width:80px;
 	border-radius: 7px;
 	text-align:center;
@@ -327,7 +311,7 @@ function pts_postInfo(){
 	
 	
 	# insert Google analytics code to monitor plugin usage.
-	add_action('admin_footer', 'pts_insertAnalyticsCode',12);
+	add_action('admin_footer', 'pts_insertAnalytics',12);
 
 	
 	
@@ -372,17 +356,8 @@ function pts_postInfo(){
 	}
 	
 	
-	 
 	
-	
-	/*
-	<a href="">'
-	.__('details!','').
-	'</a>';
-	$msgTimeOK = '';
-	*/
-	
-	echo pts_createJsToCompareTime($msgTimeWrong,$msgTimeOK);					
+	echo pts_createJsToCompareTime($msgTimeWrong,'');					
 	# div usada para reportar hora incorreta...		
 	echo '<div style="padding-left:20px;" id="divjsCT"></div>';
 	
@@ -544,8 +519,6 @@ function pts_findNextSlot($post,$changePost = False){
 		# if there are no posts in the day...
 		if(count($recentPosts)){
 			
-			
-			
 			$thereArePosts = False;
 			
 			foreach($recentPosts as $rp){
@@ -631,7 +604,7 @@ function pts_findNextSlot($post,$changePost = False){
 		# if the day is today... check to see if there is time to publish within the time window configured...
 		if($dt == date("Ymd",strtotime($startDate))){
 			#$msg .=  '- esta data e hoje! Ainda da tempo?<br>';
-			# http://codex.wordpress.org/Function_Reference/current_time
+			# https://codex.wordpress.org/Function_Reference/current_time
 			$nowLocal = current_time('mysql', $gmt = 0); 
 			# gete user local time in minutes...
 			$nowTotalMinutes =  date('H',strtotime($nowLocal)) * 60 + date('i',strtotime($nowLocal));;
@@ -888,16 +861,14 @@ function pts_options_page(){
 	global $wpdb;
 	global $plName;
 	global $plUrl;
-	global $pts_debug;
+        global $pts_debug;
+        global $pts_show_donate;
 
 	# insert Google analytics code to monitor plugin usage.
-	add_action('admin_footer', 'pts_insertAnalyticsCode',12);
+	add_action('admin_footer', 'pts_insertAnalytics',12);
 	
 	
 	$bit = explode("&",$_SERVER['REQUEST_URI']);
-	$url = $bit[0];
-	$action = $bit[1];
-	$id = $bit[2];
 	// This bit stores any updated values when the Update button has been pressed
 	if (isset($_POST['update_options'])) {
 		
