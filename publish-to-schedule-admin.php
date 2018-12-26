@@ -1,0 +1,495 @@
+<?php
+
+
+
+#	Define the options menu
+function pts_option_menu() {
+	global $plName;	
+	if (function_exists('current_user_can')) {
+		if (!current_user_can('manage_options')) return;
+	} else {
+		global $user_level;
+		get_currentuserinfo();
+		if ($user_level < 8) return;
+	}
+	if (function_exists('add_options_page')) {
+		add_options_page($plName, $plName, "manage_options", __FILE__, 'pts_options_page');
+	}
+}
+# Install the option in the WordPress configuration menu
+add_action('admin_menu', 'pts_option_menu');
+
+
+
+
+
+
+
+
+	
+// Add settings link on plugin page
+function pts_settings_link($links) { 
+    $settings_link = '<a href="options-general.php?page='.plugin_basename(__FILE__).'">' . __('Settings','pts') .'</a>'; 
+    array_unshift($links, $settings_link); 
+    return $links; 
+  } 
+  $plugin = plugin_basename(__FILE__); 
+  add_filter("plugin_action_links_$plugin", 'pts_settings_link' );	
+
+  
+
+
+  
+
+
+
+# Prepare the default set of options
+$default_options['pts_start'] = '00:00';
+$default_options['pts_end'] = '23:59';
+$default_options['pts_infosize'] = 'parcial';
+$default_options['pts_allowstats'] = 'yes';
+
+
+// the plugin options are stored in the options table under the name of the plugin file sans extension
+add_option(basename(__FILE__, ".php"), $default_options);
+
+// This method displays, stores and updates all the options
+function pts_options_page(){
+	global $wpdb;
+	global $plName;
+	global $plUrl;
+    global $pts_debug;
+    global $pts_show_donate;
+
+	# insert Google analytics code to monitor plugin usage.
+	add_action('admin_footer', 'pts_insertAnalytics',12);
+	
+	
+	$bit = explode("&",$_SERVER['REQUEST_URI']);
+	// This bit stores any updated values when the Update button has been pressed
+	if (isset($_POST['update_options'])) {
+        
+        
+        print_r($_POST);
+
+		# loads before change with post values...
+		$options = get_option(basename(__FILE__, ".php"));
+		
+		// Fill up the options array as necessary					
+		$options['pts_start'] = $_POST['pts_start']; // like having business hours
+		$options['pts_end'] = $_POST['pts_end'];		
+		
+		$options['pts_0'] = $_POST['pts_0'];
+		$options['pts_1'] = $_POST['pts_1'];
+		$options['pts_2'] = $_POST['pts_2'];
+		$options['pts_3'] = $_POST['pts_3'];
+		$options['pts_4'] = $_POST['pts_4'];
+		$options['pts_5'] = $_POST['pts_5'];
+		$options['pts_6'] = $_POST['pts_6'];
+		
+		$options['pts_infosize'] = $_POST['pts_infosize'];
+		
+		$options['pts_allowstats'] = $_POST['pts_allowstats'];
+		
+		
+		# if all weeks are NO... change the monday to YES
+		$allNo = 0;
+		for($i=0;$i<7;$i++){
+			if($options['pts_'.$i] == 'no'){
+				$allNo += 1;
+			}
+			else{
+				break;
+			}
+		}
+		if($allNo == 7){
+			$options['pts_1'] = 'Yes';
+		}
+		
+		
+		
+		while (strlen($options['pts_start']) < 5) $options['pts_start'] = "0" . $options['pts_start'];
+		while (strlen($options['pts_end']) < 5) $options['pts_end'] = "0" . $options['pts_end'];		
+		if (!gmdate('H:i',$options['pts_start'])) $options['pts_start'] = '00:00'; //guarantee a valid time
+		if (!gmdate('H:i',$options['pts_end'])) $options['pts_end'] = '23:59';
+		$time = explode(":",$options['pts_start']);
+		if (strlen($time[0]) < 2) $time[0] = '0' . $time[0];
+		if (strlen($time[1]) < 2) $time[1] = '0' . $time[1];
+		$options['pts_start'] = date("H:i",mktime($time[0],$time[1],0,9,11,2001)); // convert overruns
+		$time = explode(":",$options['pts_end']);
+		if (strlen($time[0]) < 2) $time[0] = '0' . $time[0];
+		if (strlen($time[1]) < 2) $time[1] = '0' . $time[1];
+		$options['pts_end'] = date("H:i",mktime($time[0],$time[1],0,9,11,2001));
+		
+		// store the option values under the plugin filename
+		update_option(basename(__FILE__, ".php"), $options);
+		
+		// Show a message to say we've done something
+		if($allNo == 7){
+			echo '<div class="updated"><p>' . __('You must check "Yes" for at least 1 day of week! ', 'pts') . '</p></div>';	
+		}
+		else{
+			echo '<div class="updated"><p>' . __('Options saved!', 'pts') . '</p></div>';	
+		}		
+		
+	} else {
+		$options = get_option(basename(__FILE__, ".php"));
+	}	
+    
+    
+    # load options to display
+    $options = get_option(basename(__FILE__, ".php"));
+
+
+    print_r($options);
+
+
+	# OPTIONS \ ADMIN SCREEN
+   
+    
+	?>
+		<div class="wrap">
+		
+		
+		<h2 title="<?php 
+		_e('Plugin version','pts');
+		echo ': ';
+		echo pts_get_version() 
+		?>"><?php echo ucwords(str_replace('-', ' ', basename(__FILE__, ".php"))) .' - '. __('Options', 'pts'); ?></h2>
+		
+
+
+		<form method="post" action="">
+		
+		<fieldset class="options">				
+		
+
+		<?php
+		if($pts_debug){
+			echo '<h3><strong style="color:red;">'.$plName.' - <span style="text-decoration:blink">Debug active!</span></strong></h3>';								
+		}
+		?>
+
+
+		
+		<h3 style="margin-top:5px;"><?php _e('Which days of week posts are allowed to be auto-scheduled? <br>(The schedule happens only when you click the "Pub. to Schedule" button!)',  'pts')?></h3>
+	
+		<?php _e('Put 0 in a day when you do not want posts to be scheduled!',  'pts')?>
+	
+		<p>
+		<?php _e('Example: if you put 0 on Sunday, this plugin will never schedule a post to be published on Sundays. <br> But still, if you want to schedule an article to be published in a Sunday, just schedule it using the standard schedule button of WordPress and it will be published on the date you choose, ignoring all options below!<br>',  'pts')?>
+		<br>
+		<?php _e('For each day, set how many posts will be scheduled!',  'pts')?>		
+		</p>
+		
+		
+		
+		
+		<?php				
+			$days = array('sunday','monday','tuesday','wednesday','thursday','friday','saturday');
+		?>
+		
+		<table>				
+			<?php
+			$iday = 0;
+			foreach($days as $day){
+
+                $day_value = $options["pts_$iday"]  ?? "no";
+
+				#echo $day;
+				
+			?>
+				
+				<tr valign="top">
+					<th scope="row" align="left" style="padding:5px;"><?php _e(ucfirst($day), 'pts') ?>:</th>
+					
+					<td style="padding:5px;">					
+						<input 
+							type="text" 
+							id="<?php echo $day; ?>"
+							name="<?php echo "pts_$iday"; ?>" 
+                            value="<?php 
+                                if ($day_value == 'no'){
+                                    echo '0'; 
+                                } 
+                                else if ($day_value == 'yes') {
+                                    echo '1'; 
+                                }
+                                else {
+                                    # default to display in case options is not available yet
+                                    echo ('0') ; 
+                                }
+                            ?>" 
+							style="width: 40px;"/>
+					</td>
+					
+				</tr>
+
+
+			<?php
+				
+				$iday += 1;
+			}
+			
+			?>
+
+		</table>
+		
+		
+
+		<h3 style="margin-top:10px;"><?php _e('Specify the time interval in which you want to have your posts scheduled!',  'pts')?></h3>
+		
+		<p>
+		<?php _e('Example: posts will only be scheduled to be published in this time interval.<br> But still, if you do via WordPress schedule button, you can schedule for any time you want!',  'pts')?>
+		</p>
+		
+		
+		<table class="optiontable">
+			<tr valign="top">
+				<th scope="row" align="left"><?php _e('Start Time', 'pts') ?>:</th>
+				<td><input name="pts_start" type="text" id="start" value="<?php echo $options['pts_start']; ?>" size="10" /><?php _e(' (defaults to 00:00)', 'pts') ?>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row" align="left"><?php _e('End Time', 'pts') ?>:</th>
+				<td><input name="pts_end" type="text" id="end" value="<?php echo $options['pts_end']; ?>" size="10" /><?php _e(' (defaults to 23:59)', 'pts') ?>
+				</td>
+			</tr>
+			
+			
+			
+		</table>
+
+
+		<?php
+		
+		
+		
+		
+		
+		
+		$msgTimeWrong = '
+
+		<h3 style="margin-top:20px;">'. __('Your WordPress timezone settings might be incorrect!', 'pts').		
+		'</h3>'
+		 . __('The date and time we detect : ') . '<span style="color:blue;font-weight:bold;">'
+		.date(get_option('date_format').', '.get_option('time_format'),current_time('timestamp', $gmt = 1)).
+		'</span>';
+		
+		/*
+		<p>__("If this is not your local time, you have to ", 'pts') ?> <a title="" href="options-general.php"><?php _e('configure the correct the timezone for your WordPress installation', 'pts') ?></a>. <br>
+		<?php _e('With wrong time configurations, how can the posts be properly scheduled?', 'pts') ?>
+		<br>
+		<?php _e('If your timezone is right (remember the daylight saving time), you must check the clock with your host.', 'pts') ?>
+		</p>
+		*/
+		
+
+		
+		
+		
+		$msgTimeOK = __('Your timezone configuration and server time seems to be OK!','pts').' <span style="color:green;font-weight:bold;">'.date(get_option('date_format').', '.get_option('time_format'),current_time('timestamp', $gmt = 0)).'</span>';
+		
+		
+		$msgTimeWrong = '<h3 style="margin-top:20px;">'		
+		. __('Your WordPress timezone settings might be incorrect!', 'pts').								
+		'</h3>'
+		. __('According to your web server','pts') .		
+		', '
+		. __('the GMT time is: ','pts') . ' <span style="color:blue;font-weight:bold;">'.date(get_option('date_format').', '.get_option('time_format'),current_time('timestamp', $gmt = 1)).'.</span>'.
+		'<br>'
+		. __('The timezone configured in your','pts').' <a target="_blank" href="options-general.php">'.__('WordPress settings','pts').'</a> '.__('is','pts') .': <span style="color:blue;font-weight:bold;">'.get_option('gmt_offset').', </span>'.
+		'<br>'			
+		. __('so your server think that is your local time is: ','pts') . ' <span style="color:red;font-weight:bold;">'.date(get_option('date_format').', '.get_option('time_format'),current_time('timestamp', $gmt = 0)).'</span> ... '
+		. __('but this is different from time on you machine now!','pts').
+		'<br>'
+		. __('If the difference is not too big (less than 2h or 3h) you problably will not have side effects and the plugin should work fine!','pts').
+		'<br>'
+		. __('Othewise, with big time differences, you can have issues with the real time that each post will be scheduled!','pts').
+		'<br>'
+		. __('Sometimes you have to set a different timezone to compensate daylight saving time or a missconfigured server time! ','pts').
+		
+		'<br>'
+		. __('If you can, change the timezone to correct this, refresh this page and this message will be shown anymore!','pts')		
+		;		
+		
+		
+		
+		
+		# javascript to compare the times...
+		echo pts_createJsToCompareTime($msgTimeWrong,$msgTimeOK);			
+		
+		# div usada para reportar hora incorreta...		
+		echo '<div style="padding-left:30px;" id="divjsCT"></div>';
+		
+		echo '<script type="text/javascript">	
+				jsCompareTimes();
+			</script>';
+
+		?>
+		
+		
+		
+		
+		<h3 style="margin-top:20px;"><?php _e('How much information you want to see near the "Publish" button (on post edit screen)?', 'pts') ?></h3>
+		<table>									
+			<tr valign="top">
+				<td style="padding:5px;">
+					<input type="radio" name="pts_infosize" id="pts_infosize_all" value="all"<?php if ($options['pts_infosize'] == 'all') echo ' checked'; ?>>
+					<?php 
+					_e(' Show all information availble!','pts'); 
+					echo '<br/>';
+					_e(' I want to see how this plugin works!','pts'); 
+					echo '<br/>';
+					_e(' (Might be a lot of text! Good for debugging purposes or enthusiats!)', 'pts'); 
+					 ?>
+					 />					
+				</td>
+				
+				<tr valign="top">
+				<td style="padding:5px;">
+					<input type="radio" name="pts_infosize" id="pts_infosize_parcial" value="parcial"<?php if ($options['pts_infosize'] != 'all') echo ' checked'; ?>>
+					<?php 
+					_e(' Just do the magic!','pts');
+					echo '<br/>';
+					_e(' Only show the calculated "auto schedule date" for the post!','pts');
+					?>
+					/>
+				</td>
+			</tr>			
+		</table>
+		</fieldset>
+		
+		
+		
+		
+		<h3><?php
+		echo __('Do you like this plugin?','pts');
+		?></h3>		
+		
+		<ul>
+			<?php
+			
+			
+			$twiterMessage = __(
+			"I don't have to worry anymore with scheduling post. Plugin $plName does it for me! Works like a charm! ($plUrl)" 
+			,'pts');
+			
+			$twiterMessage = str_replace(' ','%20',$twiterMessage);
+			echo '<ul>';
+			
+			echo '<li><a target="_blank" href="http://twitter.com/home?status='.$twiterMessage.'">'.__('Tweet','pts').'</a> '.__('about it','pts').'!</li>';
+			
+			
+			echo '<li><a target="_blank" href="'.$plUrl.'">'.__('Rate it','pts').'</a> '.__('on the repository!','pts').'</li>';
+			
+			$langAvailble = array();
+			array_push($langAvailble,'en','pt-BR');
+			if(! in_array(get_bloginfo('language'),$langAvailble)){
+				echo '<li><a target="_blank" href="'.$plUrl.'">'.__('Help with translation!','pts').'</a>: <br>'.
+					
+					__('We dont have this plugin translated to your language yet!','pts').
+					' ('.
+					get_bloginfo('language').
+					' )'.
+					'<br>'.
+					
+					__('The languages already translated are: ','pts');
+					echo '<li>';
+					echo '<ol>';
+					foreach($langAvailble as $lang){
+						echo('<li>');
+						echo($lang);
+						echo('</li>');
+				 	}
+					echo '</ol>';
+					echo '</li>';
+					'</li>';
+					echo '<li>';
+					
+					 _e('If you speak any of these and are native in','pts');
+					 echo(' ');
+					 echo get_bloginfo('language');
+					 echo(', ');
+					 _e('help translating this plugin to you language!','pts');
+					
+			}
+			echo '</ul>';
+			
+			
+			
+			
+			
+			
+			
+			?>			
+		</ul>	
+		
+		
+		
+
+		<h3 style="margin-top:20px;"><?php _e('Statistics', 'pts') ?></h3>
+		<?php
+		_e('Help make this plugin even better!','pts');
+		echo '<br>';
+		_e('Allow plugin usage statistics to be shared with its developer.','pts');
+		echo '<br>';
+		?> 
+		
+		<td style="padding:5px;">
+			<input type="radio" name="pts_allowstats" id="pts_allowstats" value="yes" <?php if ($options['pts_allowstats'] != 'no') echo ' checked'; ?>/><?php _e('Yes', 'pts') ?>
+			<input type="radio" name="pts_allowstats" id="pts_allowstats" value="no" <?php if ($options['pts_allowstats'] == 'no') echo ' checked'; ?>/><?php _e('No', 'pts') ?>
+		</td>
+		
+				
+		<br/>
+
+		
+
+		<?php		
+		if(($options['pts_statistics_total_work'] ?? 0) > 3){
+			echo '<h3 style="margin-top:20px;">'.__('Did it save you a lot of time?','pts').'</h3>';
+			if($options['pts_statistics_total_work'] > 20){
+				echo __('Ohh yes... it certainly did!','pts');
+				echo '<br>';
+			}
+			echo __('Since you installed this plugin','pts');
+			echo ', ';
+			echo '<strong>';
+			echo $options['pts_statistics_total_work'];
+			echo ' ';
+			echo __(' posts were automatically scheduled, saving your time!', 'pts');
+			//echo __(' posts were automatically scheduled, saving your time! So...', 'pts');
+			echo '</strong>';
+			echo '<br>';
+			echo '<br>';
+		}
+		
+
+
+		
+		if($pts_show_donate){
+			global $pts_donateURL;
+			#echo '...';
+			echo '<a href="'.$pts_donateURL.'" style="font-weight:bold;font-size:15px;" 
+			title="Donate some money (opens in a new window)!" 
+			target="_blank">';		
+			echo __('Consider making a donation',  'pts');			
+			echo '</a> ? ';			
+			echo '<br>';
+			echo '<br>';
+			echo __('Trust-me - even 1 dollar will make me happy... but you can choose any amount! :)',  'pts');
+		}		
+		
+		?>			
+		
+		<div class="submit"><input type="submit" name="update_options" value="<?php _e('Save all changes', 'pts') ?>"  style="font-weight:bold;" /></div>		
+		</form>		
+		
+	</div>
+
+<?
+}
+
+
+
