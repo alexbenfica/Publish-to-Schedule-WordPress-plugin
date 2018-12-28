@@ -18,4 +18,11 @@ deploy:
   script: deploy/deploy.sh
   # Restrict deployment to master
   on:
-    branch: master
+    tags: true
+
+# Deployment script requires few enviromnet variables
+env:
+  global:
+  - SVN_REPOSITORY={PLUGIN SVN REPOSITORY URL}
+  - secure: {ENCRYPTED SVN ACCOUNT USERNAME}
+  - secure: {ENCRYPTED SVN ACCOUNT PASSWORD}    
