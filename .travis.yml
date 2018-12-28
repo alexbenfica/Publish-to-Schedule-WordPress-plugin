@@ -14,4 +14,4 @@ branches:
 deploy:
   # Use script as a deployment tool
   provider: script
-  script: deploy/deploy.sh
+  script: ./deploy/deploy.sh
