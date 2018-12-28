@@ -3,7 +3,7 @@
 Plugin Name: Publish to Schedule
 Plugin URI: https://wordpress.org/extend/plugins/publish-to-schedule/ 
 Description: Just write! Let this plugins AUTO-schedule all posts for you! Configure once, use forever!
-Version: 4.0.06
+Version: 4.1.0
 Author: Alex Benfica
 Author URI: https://br.linkedin.com/in/alexbenfica
 License: GPL2 
@@ -25,9 +25,18 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 
- 
-# useful for translating, whrere you can createa .po file from .php file. 
-# POedit not working very well...
+# Named used to save the plugin option array to database
+define('PTS_OPTION_NAME', 'publish-to-schedule');
+
+# URL for donation.
+define('PTS_DONATE_URL', 'https://www.paypal.com/cgi-bin/webscr?business=alexbenfica@gmail.com&cmd=_donations&item_name=PublishToSchedule&no_note=0&lc='
+    .__('US',  'pts')
+    .'&currency_code='
+    .__('USD',  'pts'));
+
+
+# useful for translating, where you can create a .po file from .php file. 
+# POEdit not working very well...
 # http://www.icanlocalize.com/tools/php_scanner
 # load domains for translations from english...
 load_textdomain('pts', dirname(__FILE__).'/lang/' . get_locale() . '.mo');
@@ -37,22 +46,20 @@ $plName = 'Publish to Schedule';
 $plUrl = 'https://wordpress.org/extend/plugins/publish-to-schedule/';
 
 
-# activate debug
+# toggle debug
 $pts_debug = False;
 
 $pts_show_donate = True;
 
-# url for paypal donation.
-$pts_donateURL = 'https://www.paypal.com/cgi-bin/webscr?business=alexbenfica@gmail.com&cmd=_donations&item_name=PublishToSchedule&no_note=0&lc='
-	.__('US',  'pts').
-	'&currency_code='
-	.__('USD',  'pts');
 
-
-
-
+# include plugin files
 include(plugin_dir_path( __FILE__ ) . 'pts-util.php');    
+include(plugin_dir_path( __FILE__ ) . 'pts-gutenberg.php');    
+include(plugin_dir_path( __FILE__ ) . 'pts-analytics.php');
+include(plugin_dir_path( __FILE__ ) . 'pts-donate.php');
+include(plugin_dir_path( __FILE__ ) . 'pts-metabox.php');
 include(plugin_dir_path( __FILE__ ) . 'publish-to-schedule-admin.php');
+
 
 
 
@@ -70,82 +77,34 @@ include(plugin_dir_path( __FILE__ ) . 'publish-to-schedule-admin.php');
 #'future' - a post to publish in the future
 #'private' - not visible to users who are not logged in
 #'inherit' - a revision. see get_children.
-#'trash' - post is in trashbin. added with Version 2.9.
+#'trash' - post is in trash bin. added with Version 2.9.
 
 # set the interesting status when plugin will do its magic...
 
 
 
-$possibleStatus = array();
-array_push($possibleStatus,'new');
-array_push($possibleStatus,'pending');
-array_push($possibleStatus,'draft');
-array_push($possibleStatus,'auto-draft');
 
-# create actions for each one ...
-foreach($possibleStatus as $status) {
-	add_action($status.'_to_publish','pts_do_publish_schedule',1);	
+
+if(!gutenberg_is_active()){
+
+
+    $possibleStatus = array();
+    array_push($possibleStatus,'new');
+    array_push($possibleStatus,'pending');
+    array_push($possibleStatus,'draft');
+    array_push($possibleStatus,'auto-draft');    
+
+    # create actions for each one ...
+    foreach($possibleStatus as $status) {
+        add_action($status.'_to_publish','pts_do_publish_schedule',1);	
+    }    
 }
-
-
-
-
-
-
-
-# change the name of the publish button...
-
-function pts_change_publish_button($translation, $text) {
-    if ($text == 'Publish') {
-        return __('Pub. to Schedule', 'pts');
-    }
-    return $translation;
-}
-
-
-
-
-
-# insert Google Analytics code to monitor plugin utilization.
-
-function pts_insertAnalytics($getCode = False) {
-
-    $options = get_option(basename(__FILE__, ".php"));
-
-    # do not collect statististcs if now allowed... 	
-    if ($options['pts_allowstats'] == 'No') {
-        return '';
-    }
-
-    $analyticsCode = "<script type=\"text/javascript\">
-	var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-28857513-1']);
-		_gaq.push(['_trackPageview']);	
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-		_gaq.push(['_setCustomVar', 1,'Site URL','" . get_option('home') . "', 1 ]);
-		_gaq.push(['_setCustomVar', 2,'Articles scheduled','" . $options['pts_statistics_total_work'] . "',1]); 	
-		_gaq.push(['_setCustomVar', 3,'WP Language','" . get_bloginfo('language') . "',1]);
-	</script>";
-
-
-    if ($getCode) {
-        return $analyticsCode;
-    } else {
-        print $analyticsCode;
-    }
-}
-
 
 
 
 
 # creates a js function that will compare the cliet time with the server time, passed as variables...
 function pts_createJsToCompareTime($HTMLWrong,$HTMLOK){
-
 
 	$HTMLWrong = trim($HTMLWrong);
 	$HTMLOK = trim($HTMLOK);
@@ -182,7 +141,7 @@ function pts_createJsToCompareTime($HTMLWrong,$HTMLOK){
 		
 		difference_in_minutes = Math.abs(jsLocal - phpLocal);				
 		
-		//alert("diference: " + difference_in_minutes + "\nphpLocal:"+ phpLocal + "\n_jsLocal: "+ jsLocal);
+		//alert("difference: " + difference_in_minutes + "\nphpLocal:"+ phpLocal + "\n_jsLocal: "+ jsLocal);
 		
 		// ignores big differences as being 23 to 00 hour
 		if(difference_in_minutes > 60*12){
@@ -201,13 +160,8 @@ function pts_createJsToCompareTime($HTMLWrong,$HTMLOK){
 		
 	}		
 		
-	</script>
-	
-	
-	
-	';
-
-
+    </script>';
+    
 	return $jsCT;
 }
 
@@ -222,150 +176,11 @@ function pts_createJsToCompareTime($HTMLWrong,$HTMLOK){
 
 
 
-# create a button using only HTML, for donation.
-function pts_donateHTMLButton($url){
-	
-	global $pts_show_donate;
-	
-	if(!$pts_show_donate){
-		return '';
-	}
-	
-	$butdon = 
-	'
-	
-	<div 
-	style="
-	background-color:#FFD879;
-	height:22px;
-	width:80px;
-	border-radius: 7px;
-	text-align:center;
-	color:#305958;
-	font-weight:bold;
-	float:right;
-	">	
-	<a target="_blank" href="'.$url.'" title="'
-		.__('Please donate. Even 1 dollar will help me a lot! Seriously!',  'pts').
-		'">	
-		'.__('Donate',  'pts').'	
-		</a>
-	</div>
-	
-	';
-	return $butdon;
-}
 
 
 
 
 
-
-
-
-
-
-
-
-# show information near the publish button...
-function pts_postInfo(){
-	global $post;	
-	global $pts_donateURL;
-	global $plName;
-	global $pts_debug;
-	
-	
-	if($pts_debug){
-		echo '<div class="misc-pub-section misc-pub-section-last">';
-		echo '<div style="margin: 0 0 5px 0">';
-		echo '<strong style="color:red;">'.$plName.' - <span style="text-decoration:blink">Debug active!</span></strong>';
-		echo '</div>';
-		echo '</div>';		
-	}
-	
-	
-	# do not show info for published posts...
-	if($post->post_status == 'publish'){
-		return;
-	}	
-	
-	# do not show info for scheduled posts...
-	if($post->post_status == 'future'){
-		return;
-	}	
-
-	# do not show info for pages...
-	if($post->post_type != 'post'){
-		return;
-	}	
-	
-	
-	
-	# only change the text of publish button when plugin is active...
-	add_filter( 'gettext', 'pts_change_publish_button', 10, 2 );	
-	
-	
-	# insert Google analytics code to monitor plugin usage.
-	add_action('admin_footer', 'pts_insertAnalytics',12);
-
-	
-	
-	
-	
-	echo '<div class="misc-pub-section misc-pub-section-last" style="font-size:11px;">';
-	
-	
-	echo '<div style="margin: 0 0 5px 0">';
-	echo '<strong title="'.__('Plugin version','pts').': '.pts_get_version().'">'.$plName.'</strong>';
-	
-	
-	
-		
-	# show donate button	
-	echo pts_donateHTMLButton($pts_donateURL);
-	
-	
-	
-	echo '</div>';
-	
-
-	# if time is wrong... warn...
-
-
-
-	
-	# show diferent messages for admin and non admin users...
-	if(current_user_can('install_plugins')){
-		$msgTimeWrong = '<div style="margin: 0 0 7px 0"><span style="color:red">'.
-		__('Your WordPress timezone settings might be incorrect!','pts').
-		'</span>  ( <a href="options-general.php?page=publish-to-schedule/publish-to-schedule.php" target="_blank">'.
-		__('See details','pts').'</a> )</div>';
-	}
-	else{
-		$msgTimeWrong = '<div style="margin: 0 0 7px 0"><span style="color:red">'.
-		__('Your WordPress timezone settings might be incorrect!','pts').
-		'</span>  ( '.
-		__('Please tell the blog admin!','pts').
-		'</a> )</div>';
-			
-	}
-	
-	
-	
-	echo pts_createJsToCompareTime($msgTimeWrong,'');					
-	# div usada para reportar hora incorreta...		
-	echo '<div style="padding-left:20px;" id="divjsCT"></div>';
-	
-	echo '<script type="text/javascript">	
-			jsCompareTimes();
-		</script>';
-	
-	echo pts_findNextSlot($post);		
-	
-	
-	echo '</div>';
-}
-add_action( 'post_submitbox_misc_actions', 'pts_postInfo' );
 
 
 
@@ -438,7 +253,7 @@ function pts_findNextSlot($post,$changePost = False){
 
 	
 	# load plugin configurations...	
-	$options = get_option(basename(__FILE__, ".php"));
+	$options = get_option(PTS_OPTION_NAME);
 
 	# get start and end minutes from 0 to 1440-1
 	$startMinute =  date('H',strtotime($options['pts_start'])) * 60 + date('i',strtotime($options['pts_start']));;
@@ -503,7 +318,7 @@ function pts_findNextSlot($post,$changePost = False){
 	
 		$datetimeCheck = strtotime(current_time('mysql', $gmt = 0) . ' + '.$offset.' days');	
 		$dt = date("Ymd",$datetimeCheck);				
-		$msg .=  '' . date(get_option('date_format'),$datetimeCheck) . ' - <span style="<BBB>"> '.__(date("l",$datetimeCheck),'pts').'</span><CCC><DDD><EEE><br>';
+		$msg .=  '' . date('M j, Y',$datetimeCheck) . ' - <span style="<BBB>"> '.__(date("D",$datetimeCheck),'pts').'</span><CCC><DDD><EEE><br>';
 		
 
 		$maxPostsThisDay = pts_getMaxPostsDay($datetimeCheck);
@@ -638,9 +453,9 @@ function pts_findNextSlot($post,$changePost = False){
 		$msg = str_replace('<DDD>','',$msg);
 		
 		
-		# find the time... randon!
+		# find the time... random!
 		# even not necessary... but using seed for rand... 
-		# using post-id to guarante the same time after click post...
+		# using post-id to guarantee the same time after click post...
 		# http://www.php.net/manual/pt_BR/function.srand.php		
 		srand(intval(sqrt($post->ID) * 10000));
 				
@@ -686,10 +501,11 @@ function pts_findNextSlot($post,$changePost = False){
 		#$msgT .= '<br>';		
 		
 
+        $msgT .=  '<br />';
 		$msgT .=  '<p title="'.$msgByPass.'">';
 		$msgT .= __('Will be schedule to','pts') . ': <br>';
 		$msgT .= '<strong>';
-		$msgT .= __(date("l",strtotime($dthrPublish)),'pts') . ', ' . date(get_option('date_format'),strtotime($dthrPublish)) . ' '. __('at','') .' ' . date(get_option('time_format') , strtotime($dthrPublish));
+		$msgT .= __(date("l",strtotime($dthrPublish)),'pts') . ', ' . date('M j, Y' ,strtotime($dthrPublish)) . ' '. __('at','') .' ' . date(get_option('time_format') , strtotime($dthrPublish));
 		$msgT .= '</strong>';
 		$msgT .= '</p>';				
 		
@@ -798,17 +614,3 @@ function pts_do_publish_schedule($post){
 	wp_update_post($post);		
 	return $post;	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	

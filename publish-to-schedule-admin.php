@@ -1,17 +1,20 @@
 <?php
 
-
-
-#	Define the options menu
+# Define the options menu
 function pts_option_menu() {
-	global $plName;	
-	if (function_exists('current_user_can')) {
-		if (!current_user_can('manage_options')) return;
-	} else {
-		global $user_level;
-		get_currentuserinfo();
-		if ($user_level < 8) return;
-	}
+    global $plName;	
+    
+    if (!current_user_can('manage_options')) return;    
+
+	// if (function_exists('current_user_can')) {
+	// 	if (!current_user_can('manage_options')) return;
+	// } else {
+	// 	global $user_level;
+	// 	get_currentuserinfo();
+	// 	if ($user_level < 8) return;
+    // }
+    
+    
 	if (function_exists('add_options_page')) {
 		add_options_page($plName, $plName, "manage_options", __FILE__, 'pts_options_page');
 	}
@@ -51,7 +54,7 @@ $default_options['pts_allowstats'] = 'yes';
 
 
 // the plugin options are stored in the options table under the name of the plugin file sans extension
-add_option(basename(__FILE__, ".php"), $default_options);
+add_option(PTS_OPTION_NAME, $default_options);
 
 // This method displays, stores and updates all the options
 function pts_options_page(){
@@ -69,11 +72,10 @@ function pts_options_page(){
 	// This bit stores any updated values when the Update button has been pressed
 	if (isset($_POST['update_options'])) {
         
-        
-        print_r($_POST);
+        // print_r($_POST);
 
 		# loads before change with post values...
-		$options = get_option(basename(__FILE__, ".php"));
+		$options = get_option(PTS_OPTION_NAME);
 		
 		// Fill up the options array as necessary					
 		$options['pts_start'] = $_POST['pts_start']; // like having business hours
@@ -106,23 +108,25 @@ function pts_options_page(){
 			$options['pts_1'] = 'Yes';
 		}
 		
-		
-		
-		while (strlen($options['pts_start']) < 5) $options['pts_start'] = "0" . $options['pts_start'];
-		while (strlen($options['pts_end']) < 5) $options['pts_end'] = "0" . $options['pts_end'];		
-		if (!gmdate('H:i',$options['pts_start'])) $options['pts_start'] = '00:00'; //guarantee a valid time
-		if (!gmdate('H:i',$options['pts_end'])) $options['pts_end'] = '23:59';
+
+        # set the default values if they do not match the hh:mm        
+        if(!preg_match('/\d{2}:\d{2}/',$options['pts_start'])){
+            $options['pts_start'] = '00:00';
+        }        
+
+        if(!preg_match('/\d{2}:\d{2}/',$options['pts_end'])){
+            $options['pts_end'] = '23:59';
+        }        
+
+
 		$time = explode(":",$options['pts_start']);
-		if (strlen($time[0]) < 2) $time[0] = '0' . $time[0];
-		if (strlen($time[1]) < 2) $time[1] = '0' . $time[1];
-		$options['pts_start'] = date("H:i",mktime($time[0],$time[1],0,9,11,2001)); // convert overruns
+        $options['pts_start'] = date("H:i",mktime($time[0],$time[1],0,9,11,2001)); // convert overruns
+        
 		$time = explode(":",$options['pts_end']);
-		if (strlen($time[0]) < 2) $time[0] = '0' . $time[0];
-		if (strlen($time[1]) < 2) $time[1] = '0' . $time[1];
 		$options['pts_end'] = date("H:i",mktime($time[0],$time[1],0,9,11,2001));
 		
 		// store the option values under the plugin filename
-		update_option(basename(__FILE__, ".php"), $options);
+		update_option(PTS_OPTION_NAME, $options);
 		
 		// Show a message to say we've done something
 		if($allNo == 7){
@@ -133,16 +137,9 @@ function pts_options_page(){
 		}		
 		
 	} else {
-		$options = get_option(basename(__FILE__, ".php"));
+		$options = get_option(PTS_OPTION_NAME);
 	}	
     
-    
-    # load options to display
-    $options = get_option(basename(__FILE__, ".php"));
-
-
-    print_r($options);
-
 
 	# OPTIONS \ ADMIN SCREEN
    
@@ -155,22 +152,37 @@ function pts_options_page(){
 		_e('Plugin version','pts');
 		echo ': ';
 		echo pts_get_version() 
-		?>"><?php echo ucwords(str_replace('-', ' ', basename(__FILE__, ".php"))) .' - '. __('Options', 'pts'); ?></h2>
+		?>"><?php echo ucwords(str_replace('-', ' ', PTS_OPTION_NAME)) .' - '. __('Options', 'pts'); ?></h2>
 		
 
+        <?php
+		
+            if($pts_show_donate){
+                echo '<div style="margin:10px">';
+                echo pts_donateHTMLButton('left');    
+                
+                echo '<a href="'.PTS_DONATE_URL.'" style="font-weight:bold;font-size:15px;" 
+                    title="Donate some money (opens in a new window)!" 
+                    target="_blank" rel="noopener">';		
+                echo __('Consider making a donation',  'pts');			
+                echo '</a> !!! ';			
+                echo '<br>';
+                echo __('Trust-me - even 1 dollar will make me happy... but you can choose any amount! :)',  'pts');
+                echo '<br>';
+                echo '<br>';
+                echo '</div>';            
+            }		      
+        ?>
 
 		<form method="post" action="">
 		
-		<fieldset class="options">				
-		
+		<fieldset class="options">
 
 		<?php
 		if($pts_debug){
 			echo '<h3><strong style="color:red;">'.$plName.' - <span style="text-decoration:blink">Debug active!</span></strong></h3>';								
 		}
 		?>
-
-
 		
 		<h3 style="margin-top:5px;"><?php _e('Which days of week posts are allowed to be auto-scheduled? <br>(The schedule happens only when you click the "Pub. to Schedule" button!)',  'pts')?></h3>
 	
@@ -216,8 +228,8 @@ function pts_options_page(){
                                     echo '1'; 
                                 }
                                 else {
-                                    # default to display in case options is not available yet
-                                    echo ('0') ; 
+                                    # default to display the actual value!
+                                    echo $day_value ; 
                                 }
                             ?>" 
 							style="width: 40px;"/>
@@ -467,19 +479,6 @@ function pts_options_page(){
 		
 
 
-		
-		if($pts_show_donate){
-			global $pts_donateURL;
-			#echo '...';
-			echo '<a href="'.$pts_donateURL.'" style="font-weight:bold;font-size:15px;" 
-			title="Donate some money (opens in a new window)!" 
-			target="_blank">';		
-			echo __('Consider making a donation',  'pts');			
-			echo '</a> ? ';			
-			echo '<br>';
-			echo '<br>';
-			echo __('Trust-me - even 1 dollar will make me happy... but you can choose any amount! :)',  'pts');
-		}		
 		
 		?>			
 		
