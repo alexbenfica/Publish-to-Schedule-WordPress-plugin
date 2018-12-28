@@ -1,10 +1,13 @@
-deploy:
-  #
-  # Auto-deploys the built plugin to WordPress.org on push to master branch
-  #
-  provider: script
-  skip_cleanup: true
-  script: ./build/deploy.sh
-  on:
-    branch: master
-    php: 7.0
+# .travis.yml
+ 
+language: php
+ 
+sudo: false
+ 
+php:
+  - 7.0
+  - 7.1
+ 
+script:
+  # Run your tests here.
+  - echo 'Tested'
