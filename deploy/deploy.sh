@@ -6,6 +6,7 @@ svn co https://plugins.svn.wordpress.org/$SVN_REPOSITORY ../svn
 
 ls -las ./
 pwd
+tree /
 
 # 2. Copy git repository contents to SNV trunk/ directory
 cp -R ./* ../svn/trunk/
