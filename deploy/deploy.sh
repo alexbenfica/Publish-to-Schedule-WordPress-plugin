@@ -27,6 +27,8 @@ mv ./assets/ ../assets/
 # 5. Clean up unnecessary files
 rm -rf .git/
 rm -rf deploy/
+rm -rf build/
+rm -rf nbprject/
 rm .travis.yml
 
 # 6. Go to SVN repository root
@@ -36,10 +38,8 @@ echo 'inside SVN root'
 pwd
 ls -las
 
-
+# 7. Add all new files
+svn add --force * --auto-props --parents --depth infinity -q
 
 # 8. Push SVN tag
-svn ci  --message "Releasing" \
-        --username $SVN_USERNAME \
-        --password $SVN_PASSWORD \
-        --non-interactive
+svn ci --message "Releasing (Travis build: $TRAVIS_BUILD_ID )" --username $SVN_USERNAME --password $SVN_PASSWORD --non-interactive
