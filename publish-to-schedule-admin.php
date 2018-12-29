@@ -206,9 +206,11 @@ function pts_options_page(){
 			$iday = 0;
 			foreach($days as $day){
 
-                $day_value = $options["pts_$iday"]  ?? "no";
+                $day_value = $options["pts_$iday"];
 
-				#echo $day;
+                if(!$day_value){
+                    $day_value = 'no';
+                }
 				
 			?>
 				
@@ -459,7 +461,7 @@ function pts_options_page(){
 		
 
 		<?php		
-		if(($options['pts_statistics_total_work'] ?? 0) > 3){
+		if(($options['pts_statistics_total_work']) > 3){
 			echo '<h3 style="margin-top:20px;">'.__('Did it save you a lot of time?','pts').'</h3>';
 			if($options['pts_statistics_total_work'] > 20){
 				echo __('Ohh yes... it certainly did!','pts');

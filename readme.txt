@@ -116,6 +116,9 @@ Any other languages... you're welcome! Thank you!
 
 == Changelog ==
 
+= 4.4.0 =
+* Allow compatibility with PHP < 7.0 again.
+
 = 4.3.0 =
 * Small interface changes.
 * Fixing typos.
