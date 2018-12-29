@@ -28,8 +28,13 @@ mv ./assets/ ../assets/
 rm -rf .git/
 rm -rf deploy/
 rm -rf build/
-rm -rf nbprject/
+rm -rf nbproject/
 rm .travis.yml
+
+echo 'inside SVN trunk - after removing files and folders'
+pwd
+ls -las
+
 
 # 6. Go to SVN repository root
 cd ../
@@ -37,6 +42,12 @@ cd ../
 echo 'inside SVN root'
 pwd
 ls -las
+
+
+# 5. Clean up unnecessary files
+svn delete deploy
+svn delete build
+svn delete nbproject
 
 # 7. Add all new files
 svn add --force * --auto-props --parents --depth infinity -q
