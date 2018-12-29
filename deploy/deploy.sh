@@ -25,6 +25,8 @@ mv ./assets/* ../assets/
 rm -rf ./.git/
 rm -rf ./deploy
 rm -rf ./build
+rm -rf ./assets/assets
+rm -rf ./assets/*.psd
 rm -rf ./nbproject/
 rm -rf ./.travis.yml
 
@@ -47,9 +49,10 @@ ls -las assets
 svn delete -q deploy
 svn delete -q build
 svn delete -q nbproject
+svn delete -q assets/assets
 
 # 7. Add all new files
-#svn add --force * --auto-props --parents --depth infinity -q
+svn add --force * --auto-props --parents --depth infinity -q
 
 # 8. Push SVN tag
-#svn ci --message "Releasing (Travis build: $TRAVIS_BUILD_ID )" --username $SVN_USERNAME --password $SVN_PASSWORD --non-interactive
+svn ci --message "Releasing (Travis build: $TRAVIS_BUILD_ID )" --username $SVN_USERNAME --password $SVN_PASSWORD --non-interactive
