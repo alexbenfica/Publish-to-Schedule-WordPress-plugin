@@ -3,6 +3,9 @@
 # 1. Clone complete SVN repository to separate directory
 svn co https://plugins.svn.wordpress.org/$SVN_REPOSITORY ../svn
 
+
+ls -las ./
+
 # 2. Copy git repository contents to SNV trunk/ directory
 cp -R ./* ../svn/trunk/
 
