@@ -4,15 +4,22 @@
 svn co https://plugins.svn.wordpress.org/$SVN_REPOSITORY ../svn
 
 
-ls -las ./
+
+echo 'inside initial dir'
 pwd
-tree /
+ls -las
+
+
 
 # 2. Copy git repository contents to SNV trunk/ directory
 cp -R ./* ../svn/trunk/
 
 # 3. Switch to SVN repository
 cd ../svn/trunk/
+
+echo 'inside SVN trunk'
+pwd
+ls -las
 
 # 4. Move assets/ to SVN /assets/
 mv ./assets/ ../assets/
@@ -24,6 +31,12 @@ rm .travis.yml
 
 # 6. Go to SVN repository root
 cd ../
+
+echo 'inside SVN root'
+pwd
+ls -las
+
+
 
 # 8. Push SVN tag
 svn ci  --message "Releasing" \
