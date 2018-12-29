@@ -1,8 +1,8 @@
 === Publish to Schedule ===
-Contributors: alexbenfica,flauius
+Contributors: alexbenfica
 Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, productivity, publish control, schedule post, autopost, autopublish, post later, auto schedule
 Requires at least: 2.8
-Tested up to: 4.7.3
+Tested up to: 4.0.2
 Stable tag: trunk
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=N827XSKKL7388&lc=US&item_name=Publish%20to%20Schedule%20Plugin&item_number=publish%2dto%2dschedule&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 
@@ -34,6 +34,8 @@ This information is important as it allow you to manually change the date and ti
 It is very simple to use and avoid you to be searching when the last post were published each time you have to schedule a date to a post you are writing. 
 Specially useful if you have multiple blogs and each one have a different post schedule. 
 
+In portuguese:
+
 Se preferir, veja a **documentação em português** do [plugin para WordPress Publish to Schedule][doc ptbr].
 
 [doc ptbr]: http://goo.gl/y80h6
@@ -45,7 +47,7 @@ Se preferir, veja a **documentação em português** do [plugin para WordPress P
 == Installation ==
 
 To install it, simply unzip the file linked above and save it in your plugins directory under wp-content. In the plugin manager activate the plugin. 
-Settings can be acessible from WordPress settings menu or even from the plugins administration area.
+Settings can be accessible from WordPress settings menu or even from the plugins administration area.
 
 There you must define which days of week you want to have your posts schedule... and choose a time interval too, if you prefer.
 
@@ -97,7 +99,7 @@ Yes. You can! I'm available to talk about this! And I can do other plugins too.
 = Should I donate? =
 
 You can, if you want. I would like that. Means that my work e valuable for someone else!
-My Paypal account for donations is: alexbenfica@gmail.com 
+My PayPal account for donations is: alexbenfica@gmail.com 
 
 = Can I translate it? =
 
@@ -113,6 +115,11 @@ Any other languages... you're welcome! Thank you!
 3. This is what you'll see while write your post: the date that post will be automatically schedule, and why! To see less information change the related option in the plugin configuration.
 
 == Changelog ==
+
+= 4.2.0 =
+* Tested with Gutenberg editor.
+* Tested up to WordPress 5.0.2
+
 = 4.0.06 =
 * Added Dutch language. Thanks Stephan van Rooij (@svrooij) for sending me the .po file!
 * Tested up to WordPress 4.7.3
@@ -155,8 +162,3 @@ Any other languages... you're welcome! Thank you!
 = 3.1.8 = 
 * First public release.
 * The plugin has being tested for a long time before I take some time to publish it here, and I was not actually tracking changes as it was only running locally in one or two blogs.
-
-
-
-== Upgrade Notice ==
-Nothing here yet!

@@ -21,9 +21,9 @@ _\ \ (__| | | |  __/ (_| | |_| | |  __/
 
 /* TEAM */
 Name: Alex Benfica
-Title: Developer
+Title: Fullstack Software Developer
 Twitter: alextben
 
 /* META */
-Updated: 2016/02/09
+Updated: 2018/28/12
 See: http://humanstxt.org/

@@ -60,11 +60,12 @@ function pts_postInfo(){
 	global $pts_debug;
     
     
-    if(gutenberg_is_active()){
-        echo "Gutenberg editor not supported!<br>
-        Classic editor is much more user friendly!";
-        return;
-    }
+
+    // if(gutenberg_is_active()){
+    //     echo "Gutenberg editor not supported!<br>
+    //     Classic editor is much more user friendly!";
+    //     return;
+    // }
 
 	
 	if($pts_debug){
@@ -97,7 +98,9 @@ function pts_postInfo(){
     }	    
 
     if(!$show_elements){
-        echo pts_donateHTMLButton();
+        echo '<div style="height:30px;">';
+        echo pts_donateHTMLButton("left");
+        echo '</div>';
         return;
     }
 
@@ -157,8 +160,11 @@ function pts_postInfo(){
 
     echo 'Use the Publish button to schedule this post!!';
 
-	# show donate button	
-	echo pts_donateHTMLButton();
+    
+    # Donate button in normal circumstances
+    echo '<div style="height:30px;">';
+    echo pts_donateHTMLButton("left");
+    echo '</div>';
 
 }
 
