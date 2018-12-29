@@ -74,7 +74,7 @@ msgid "of"
 msgstr ""
 
 #: ../publish-to-schedule.php:628
-msgid "Availble day!"
+msgid "available day!"
 msgstr ""
 
 #: ../publish-to-schedule.php:639
@@ -270,7 +270,7 @@ msgid ""
 msgstr ""
 
 #: ../publish-to-schedule.php:1174
-msgid " Show all information availble!"
+msgid " Show all information available!"
 msgstr ""
 
 #: ../publish-to-schedule.php:1176

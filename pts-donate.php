@@ -27,8 +27,8 @@ function pts_donateHTMLButton($float = 'right'){
         color:#305958;
 	    font-weight:bold;
         float:'.$float.';
-        margin: 10px;
-        margin-top: 4px;
+        margin: 4px 10px 10px 0;
+        
 	">	
 	<a target="_blank" href="'.PTS_DONATE_URL.'" title="'
 		.__('Please donate. Even 1 dollar will help me a lot! Seriously!',  'pts').

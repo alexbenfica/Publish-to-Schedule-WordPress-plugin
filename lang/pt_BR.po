@@ -77,7 +77,7 @@ msgid "of"
 msgstr "de"
 
 #: ../publish-to-schedule.php:628
-msgid "Availble day!"
+msgid "available day!"
 msgstr "Dia disponível"
 
 #: ../publish-to-schedule.php:639
@@ -299,7 +299,7 @@ msgstr ""
 "criação de artigos)?"
 
 #: ../publish-to-schedule.php:1174
-msgid " Show all information availble!"
+msgid " Show all information available!"
 msgstr "Mostrar toda informação disponível!"
 
 #: ../publish-to-schedule.php:1176

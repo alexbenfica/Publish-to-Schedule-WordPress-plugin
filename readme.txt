@@ -2,7 +2,7 @@
 Contributors: alexbenfica
 Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, productivity, publish control, schedule post, autopost, autopublish, post later, auto schedule
 Requires at least: 2.8
-Tested up to: 4.0.2
+Tested up to: 5.0.2
 Stable tag: trunk
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=N827XSKKL7388&lc=US&item_name=Publish%20to%20Schedule%20Plugin&item_number=publish%2dto%2dschedule&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 
@@ -115,6 +115,10 @@ Any other languages... you're welcome! Thank you!
 3. This is what you'll see while write your post: the date that post will be automatically schedule, and why! To see less information change the related option in the plugin configuration.
 
 == Changelog ==
+
+= 4.3.0 =
+* Small interface changes.
+* Fixing typos.
 
 = 4.2.0 =
 * Tested with Gutenberg editor.

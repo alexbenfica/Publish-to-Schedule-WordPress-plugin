@@ -158,7 +158,7 @@ function pts_postInfo(){
     echo '</div>';
     
 
-    echo 'Use the Publish button to schedule this post!!';
+    echo 'Hit Publish to schedule this post!';
 
     
     # Donate button in normal circumstances

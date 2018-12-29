@@ -3,12 +3,12 @@
 Plugin Name: Publish to Schedule
 Plugin URI: https://wordpress.org/extend/plugins/publish-to-schedule/ 
 Description: Just write! Let this plugins AUTO-schedule all posts for you! Configure once, use forever!
-Version: 4.2.0
+Version: 4.3.0
 Author: Alex Benfica
 Author URI: https://br.linkedin.com/in/alexbenfica
 License: GPL2 
  
-Copyright 2012-2017  Publish to Schedule  (email : alexbenfica@gmail.com)
+Copyright 2012-2018  Publish to Schedule  (email : alexbenfica@gmail.com)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as 
@@ -406,11 +406,11 @@ function pts_findNextSlot($post,$changePost = False){
 		*/
 		
 		
-		$msgDayAvailble = '';
+		$msgDayavailable = '';
 		
-		$msgDayAvailble .= " (   $nPostsDay  "  . __('of','pts') . ' '. "$maxPostsThisDay ) ";
+		$msgDayavailable .= " (   $nPostsDay  "  . __('of','pts') . ' '. "$maxPostsThisDay ) ";
 		
-		$msgDayAvailble .= ' | <strong>' . __('Availble day!','pts') . '</strong>';				
+		$msgDayavailable .= ' | <strong>' . __('available day!','pts') . '</strong>';				
 		
 		# if the day is today... check to see if there is time to publish within the time window configured...
 		if($dt == date("Ymd",strtotime($startDate))){
@@ -430,16 +430,16 @@ function pts_findNextSlot($post,$changePost = False){
 			}			
 			if($nowTotalMinutes < $startMinute){
 				#$msg .=  '- OK! Artigo sera agendado. <br>';
-				$msg = str_replace('<EEE>',$msgDayAvailble,$msg);
+				$msg = str_replace('<EEE>',$msgDayavailable,$msg);
 			}			
 			if($nowTotalMinutes >= $startMinute){
 				#$msg .=  '- OK! Artigo sera agendado. <br>';
-				$msg = str_replace('<EEE>',$msgDayAvailble,$msg);
+				$msg = str_replace('<EEE>',$msgDayavailable,$msg);
 				$startSort = $nowTotalMinutes;
 			}						
 		}
 		else{
-			$msg = str_replace('<EEE>',$msgDayAvailble,$msg);
+			$msg = str_replace('<EEE>',$msgDayavailable,$msg);
 			#$msg .=  '- OK! Artigo sera agendado. <br>';
 		}		
 		
@@ -502,7 +502,7 @@ function pts_findNextSlot($post,$changePost = False){
 		#$msgT .= '<br>';		
 		
 
-        $msgT .=  '<br />';
+        
 		$msgT .=  '<p title="'.$msgByPass.'">';
 		$msgT .= __('Will be schedule to','pts') . ': <br>';
 		$msgT .= '<strong>';
@@ -516,12 +516,11 @@ function pts_findNextSlot($post,$changePost = False){
 		# uses only to debug and show logs on main screen...
 		if(!$changePost){		
 			if($options['pts_infosize'] == 'all'){
-				return $msg . $msgT;
+                return trim($msg .  "<br />". $msgT);
 			}
 			else{
-				return $msgT;
-			}
-			
+				return trim($msgT);
+			}			
 		}
 		else{
 			# statistics to show how many post the plugin helps to schedule...
@@ -531,7 +530,7 @@ function pts_findNextSlot($post,$changePost = False){
 			else{
 				$options['pts_statistics_total_work'] = 1;
 			}
-			update_option(basename(__FILE__, ".php"), $options);
+			// update_option(basename(__FILE__, ".php"), $options);
 			return $dthrPublish;		
 		}
 	}		

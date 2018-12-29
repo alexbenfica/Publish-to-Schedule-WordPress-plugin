@@ -349,7 +349,7 @@ function pts_options_page(){
 				<td style="padding:5px;">
 					<input type="radio" name="pts_infosize" id="pts_infosize_all" value="all"<?php if ($options['pts_infosize'] == 'all') echo ' checked'; ?>>
 					<?php 
-					_e(' Show all information availble!','pts'); 
+					_e(' Show all information available!','pts'); 
 					echo '<br/>';
 					_e(' I want to see how this plugin works!','pts'); 
 					echo '<br/>';
@@ -395,9 +395,9 @@ function pts_options_page(){
 			
 			echo '<li><a target="_blank" href="'.$plUrl.'">'.__('Rate it','pts').'</a> '.__('on the repository!','pts').'</li>';
 			
-			$langAvailble = array();
-			array_push($langAvailble,'en','pt-BR');
-			if(! in_array(get_bloginfo('language'),$langAvailble)){
+			$langavailable = array();
+			array_push($langavailable,'en','pt-BR');
+			if(! in_array(get_bloginfo('language'),$langavailable)){
 				echo '<li><a target="_blank" href="'.$plUrl.'">'.__('Help with translation!','pts').'</a>: <br>'.
 					
 					__('We dont have this plugin translated to your language yet!','pts').
@@ -409,7 +409,7 @@ function pts_options_page(){
 					__('The languages already translated are: ','pts');
 					echo '<li>';
 					echo '<ol>';
-					foreach($langAvailble as $lang){
+					foreach($langavailable as $lang){
 						echo('<li>');
 						echo($lang);
 						echo('</li>');
