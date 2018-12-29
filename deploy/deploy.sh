@@ -5,6 +5,7 @@ svn co https://plugins.svn.wordpress.org/$SVN_REPOSITORY ../svn
 
 
 ls -las ./
+pwd
 
 # 2. Copy git repository contents to SNV trunk/ directory
 cp -R ./* ../svn/trunk/
@@ -23,11 +24,8 @@ rm .travis.yml
 # 6. Go to SVN repository root
 cd ../
 
-# 7. Create SVN tag
-svn cp trunk tags/$TRAVIS_TAG
-
 # 8. Push SVN tag
-svn ci  --message "Release $TRAVIS_TAG" \
+svn ci  --message "Releasing" \
         --username $SVN_USERNAME \
         --password $SVN_PASSWORD \
         --non-interactive
