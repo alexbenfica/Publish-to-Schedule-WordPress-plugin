@@ -21,12 +21,12 @@ cd ../svn/trunk/
 # 4. Move assets/ to SVN /assets/
 mv ./assets/* ../assets/
 
-# 5. Clean up unnecessary files
-rm -rf .git/
-rm -rf deploy/
-rm -rf build/
-rm -rf nbproject/
-rm .travis.yml
+# 5. Clean up unnecessary files from trunj
+rm -rf ./.git/
+rm -rf ./deploy
+rm -rf ./build
+rm -rf ./nbproject/
+rm -rf ./.travis.yml
 
 echo 'SVN trunk - after removing files and folders'
 pwd
@@ -39,10 +39,14 @@ echo 'SVN root'
 pwd
 ls -las
 
+echo 'SVN root'
+pwd
+ls -las assets
+
 # 5. Clean up unnecessary files
-svn delete deploy
-svn delete build
-svn delete nbproject
+svn delete -q deploy
+svn delete -q build
+svn delete -q nbproject
 
 # 7. Add all new files
 #svn add --force * --auto-props --parents --depth infinity -q
