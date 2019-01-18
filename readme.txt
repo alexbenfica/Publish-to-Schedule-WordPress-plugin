@@ -116,6 +116,9 @@ Any other languages... you're welcome! Thank you!
 
 == Changelog ==
 
+= 4.4.1 =
+* Fix error that only 1 post per day was allowed.
+
 = 4.4.0 =
 * Allow compatibility with PHP < 7.0 again.
 
