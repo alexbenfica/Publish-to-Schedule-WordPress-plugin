@@ -193,7 +193,7 @@ function pts_createJsToCompareTime($HTMLWrong,$HTMLOK){
 
 function pts_getMaxPostsDay($datetimeCheck){
 
-	global $options;
+	global $pts_options;
 	
 
 	# id day of week is allowed... (replaces <BBB>)
@@ -201,20 +201,20 @@ function pts_getMaxPostsDay($datetimeCheck){
 	
 	/*
 	print_r($datetimeCheck);	
-	print_r($options);
+	print_r($pts_options);
 	print_r($opt);
 	echo '<br>';
 	*/
 	
 	# translate the old style option  no\yes para 0\1+
-	if($options[$opt] == 'no'){
+	if($pts_options[$opt] == 'no'){
 		return 0;	
 	}
-	if($options[$opt] == 'yes'){
+	if($pts_options[$opt] == 'yes'){
 		return 1;	
 	}
-	if($options[$opt] != ''){
-		return $options[$opt];
+	if($pts_options[$opt] != ''){
+		return $pts_options[$opt];
 	}
 	else{
 		return 1;
@@ -254,11 +254,11 @@ function pts_findNextSlot($post,$changePost = False){
 
 	
 	# load plugin configurations...	
-	$options = get_option(PTS_OPTION_NAME);
+	$pts_options = get_option(PTS_OPTION_NAME);
 
 	# get start and end minutes from 0 to 1440-1
-	$startMinute =  date('H',strtotime($options['pts_start'])) * 60 + date('i',strtotime($options['pts_start']));;
-	$endMinute = date('H',strtotime($options['pts_end'])) * 60 + date('i',strtotime($options['pts_end']));;
+	$startMinute =  date('H',strtotime($pts_options['pts_start'])) * 60 + date('i',strtotime($pts_options['pts_start']));;
+	$endMinute = date('H',strtotime($pts_options['pts_end'])) * 60 + date('i',strtotime($pts_options['pts_end']));;
 
 	$msg = '';
 	
@@ -273,7 +273,7 @@ function pts_findNextSlot($post,$changePost = False){
 	}
 	
 	if($pts_debug and True){
-		$msg .= 'DEBUG: $options = ' . print_r($options,True) . '<br>';		
+		$msg .= 'DEBUG: $pts_options = ' . print_r($pts_options,True) . '<br>';		
 	}
 	
 	
@@ -515,7 +515,7 @@ function pts_findNextSlot($post,$changePost = False){
 	
 		# uses only to debug and show logs on main screen...
 		if(!$changePost){		
-			if($options['pts_infosize'] == 'all'){
+			if($pts_options['pts_infosize'] == 'all'){
                 return trim($msg .  "<br />". $msgT);
 			}
 			else{
@@ -524,13 +524,13 @@ function pts_findNextSlot($post,$changePost = False){
 		}
 		else{
 			# statistics to show how many post the plugin helps to schedule...
-			if(array_key_exists('pts_statistics_total_work',$options)){
-				$options['pts_statistics_total_work'] = $options['pts_statistics_total_work'] + 1;
+			if(array_key_exists('pts_statistics_total_work',$pts_options)){
+				$pts_options['pts_statistics_total_work'] = $pts_options['pts_statistics_total_work'] + 1;
 			}
 			else{
-				$options['pts_statistics_total_work'] = 1;
+				$pts_options['pts_statistics_total_work'] = 1;
 			}
-			// update_option(basename(__FILE__, ".php"), $options);
+			// update_option(basename(__FILE__, ".php"), $pts_options);
 			return $dthrPublish;		
 		}
 	}		
