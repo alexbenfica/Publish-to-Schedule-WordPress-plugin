@@ -5,10 +5,10 @@
 
 function pts_insertAnalytics($getCode = False) {
 
-    $options = get_option(PTS_OPTION_NAME);
+    $pts_options = get_option(PTS_OPTION_NAME);
 
     # do not collect statististcs if now allowed... 	
-    if ($options['pts_allowstats'] == 'No') {
+    if ($pts_options['pts_allowstats'] == 'No') {
         return '';
     }
 
@@ -22,7 +22,7 @@ function pts_insertAnalytics($getCode = False) {
 	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	  })();
 		_gaq.push(['_setCustomVar', 1,'Site URL','" . get_option('home') . "', 1 ]);
-		_gaq.push(['_setCustomVar', 2,'Articles scheduled','" . $options['pts_statistics_total_work'] . "',1]); 	
+		_gaq.push(['_setCustomVar', 2,'Articles scheduled','" . $pts_options['pts_statistics_total_work'] . "',1]); 	
 		_gaq.push(['_setCustomVar', 3,'WP Language','" . get_bloginfo('language') . "',1]);
 	</script>";
 
