@@ -234,7 +234,7 @@ function pts_findNextSlot($post,$changePost = False){
 	global $wpdb;
 	global $table_prefix;
 	global $pts_debug;
-	
+	global $pts_options;
 
 	# if is a draft or pending with a date in future, means that it were published already, mas back to draft or pending...
 	if(($post->post_status == 'draft') or ($post->post_status == 'pending')){		
