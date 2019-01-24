@@ -489,8 +489,5 @@ function pts_options_page(){
 		
 	</div>
 
-<?
+<?php
 }
-
-
-
