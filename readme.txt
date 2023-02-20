@@ -2,57 +2,30 @@
 Contributors: alexbenfica
 Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, productivity, publish control, schedule post, autopost, autopublish, post later, auto schedule
 Requires at least: 2.8
-Tested up to: 5.3
+Tested up to: 6.1.1
 Stable tag: trunk
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=N827XSKKL7388&lc=US&item_name=Publish%20to%20Schedule%20Plugin&item_number=publish%2dto%2dschedule&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
+Donate link: https://www.buymeacoffee.com/FQNxAqVUTo
 
-
-Write and not worry about scheduling posts, keeping the periodicity for your readers and not waste time finding out next date to publish.
-
+Say goodbye to the hassle of manually scheduling your WordPress blog posts with Publish to Schedule! With our plugin, you can easily automate your post publishing process, ensuring that your readers receive new content on a consistent and timely basis. No more wasted time trying to figure out the next post date or worrying about maintaining your post frequency.
 
 == Description ==
+Looking for a way to streamline your WordPress blog post scheduling? Look no further than Publish to Schedule!
 
-With this plugin you don't need to manually choose the date when a post will be published. After a simple configuration the plugin will schedule your posts when you click publish.
+Publish to Schedule is a powerful and flexible WordPress scheduling plugin that lets you automate your blog post publishing process. With just a few simple configurations, you can set up a schedule that works for you, ensuring that your content is consistently published on the days and times you choose.
 
-Just configure days of week, the number of posts each day and time interval you want posts to be auto scheduled and each post will be automatically scheduled for these days with no more than the number you specified of posts per day.
+With the ability to set specific days of the week, number of posts per day, and time intervals for scheduling, Publish to Schedule takes the guesswork out of post publishing. And if you ever need to make adjustments, the plugin provides clear and detailed information in the publish box, allowing you to easily modify dates and times as needed.
 
-You can keep reading this... or you can watch this [spontaneous video][ptsvideo] from Eli The Computer Guy explaining how this free plugin works!
-Thank you Eli. I'm really happy to know that my plugin is helping many people. You made my day.
+Publish to Schedule is perfect for bloggers who want to focus on creating great content, without the hassle of manual scheduling. And with its easy-to-use interface, even those with little technical knowledge can quickly get up and running.
 
-[ptsvideo]: https://www.youtube.com/watch?v=mT8zTAtu7lc
-            "Plugin WordPress Publish to Schedule - Video from Eli The Computer Guy"
-
-Now that you have already watched the video... read the rest!
-
-It is useful as readers will have articles with maintain some defined periodicity.
-
-Besides choose the day of week when you want posts published, you can set the time too. You might specify an interval in which you like posts to be scheduled. The plugin will choose a random time within this interval.
-
-In order to make things clear and let no doubts about why an specific data were chosen, the plugins shows some informations in the publish box. You can set up how much info you want to see there.
-This information is important as it allow you to manually change the date and time, if you have your reasons to.
-
-It is very simple to use and avoid you to be searching when the last post were published each time you have to schedule a date to a post you are writing.
-Specially useful if you have multiple blogs and each one have a different post schedule.
-
-In portuguese:
-
-Se preferir, veja a **documentação em português** do [plugin para WordPress Publish to Schedule][doc ptbr].
-
-[doc ptbr]: http://goo.gl/y80h6
-            "Plugin WordPress Publish to Schedule - pt_BR"
-
-
-
+So if you're looking to take your blog to the next level, download Publish to Schedule today and see the difference it can make for your content creation process.
 
 == Installation ==
 
-To install it, simply unzip the file linked above and save it in your plugins directory under wp-content. In the plugin manager activate the plugin.
-Settings can be accessible from WordPress settings menu or even from the plugins administration area.
+Installing Publish to Schedule is quick and easy. To get started, simply download the file linked above and unzip it. Then, save the file to your plugins directory under wp-content and activate the plugin in the plugin manager.
 
-There you must define which days of week you want to have your posts schedule... and choose a time interval too, if you prefer.
+Once the plugin is activated, you can access the settings from the WordPress settings menu or the plugins administration area. From there, you can define which days of the week you want to schedule your posts and choose a time interval for automatic scheduling.
 
-That's all. Now you'll see the plugin scheduled date and time each time you write a new post. Enjoy it!
-
+Once you've set your preferences, you're all set! When you write a new post, you'll see the scheduled date and time provided by the Publish to Schedule plugin. This will help you keep track of your content and ensure that it's consistently published on the days and times you choose.
 == Frequently Asked Questions ==
 
 
@@ -116,6 +89,11 @@ Any other languages... you're welcome! Thank you!
 
 == Changelog ==
 
+= 4.5.0 =
+* Fixing low risk vulnerability
+* Removing broken links from readme.
+* Improving code readability
+
 = 4.4.2 =
 * Fix error on PHP versions configured as short_open_tag = Off (usually PHP 5.3). This error caused Publish to Schedule to broke sites when installed.
 
@@ -166,7 +144,6 @@ Any other languages... you're welcome! Thank you!
 
 * Tested with WordPress 3.4.1 and it is working fine!
 * If the post is being scheduled for the day that is being written, it is scheduled to be published 3 minutes after clicking the "Publish to schedule." It is obviously necessary that the time interval is allowed. This causes the post to be online as soon as possible, generating more revenue that day.
-
 
 = 3.1.9 =
 * Changed direct settings link to work from plugin administration even if the plugin is installed in a different folder under plugins directory.

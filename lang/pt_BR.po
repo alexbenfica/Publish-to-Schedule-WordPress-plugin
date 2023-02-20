@@ -400,11 +400,9 @@ msgstr "Porque não faz uma doação"
 
 #: ../publish-to-schedule.php:1317
 msgid ""
-"Trust-me - even 1 dollar will make me happy... but you can choose any "
-"amount! :)"
+"Trust-me - even 1 dollar a month will make me super happy... :)"
 msgstr ""
-"Acredite - mesmo 1 real já dá alguma alegria... mas você pode escolher outor "
-"valor se quiser! :)"
+"Acredite - 5 reais por m6es já dá alguma alegria imensa... "
 
 #: ../publish-to-schedule.php:1322
 msgid "Save all changes"
