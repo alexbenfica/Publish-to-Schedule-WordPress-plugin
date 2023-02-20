@@ -89,10 +89,11 @@ Any other languages... you're welcome! Thank you!
 
 == Changelog ==
 
-= 4.5.0 =
+= 4.5.4 =
 * Fixing low risk vulnerability
 * Removing broken links from readme.
 * Improving code readability
+* Changed icon and cover to use images created by Stable Diffusion AI
 
 = 4.4.2 =
 * Fix error on PHP versions configured as short_open_tag = Off (usually PHP 5.3). This error caused Publish to Schedule to broke sites when installed.

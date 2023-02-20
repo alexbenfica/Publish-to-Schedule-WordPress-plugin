@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+# Install subversion
+# Run this script from the root of the repository as below:
+# SVN_PASSWORD=XXXXXXX ./deploy/deploy.sh
+
+SVN_REPOSITORY=publish-to-schedule
+SVN_USERNAME=alexbenfica
+
+rm -rf ./svn
+
 # 1. Clone complete SVN repository to separate directory
 svn co https://plugins.svn.wordpress.org/$SVN_REPOSITORY ../svn
 
@@ -32,18 +41,12 @@ rm -rf ./.travis.yml
 
 echo 'SVN trunk - after removing files and folders'
 pwd
-ls -las
 
 # 6. Go to SVN repository root
 cd ../
 
 echo 'SVN root'
 pwd
-ls -las
-
-echo 'SVN root'
-pwd
-ls -las assets
 
 # 5. Clean up unnecessary files
 svn delete -q deploy
@@ -55,4 +58,4 @@ svn delete -q assets/assets
 svn add --force * --auto-props --parents --depth infinity -q
 
 # 8. Push SVN tag
-svn ci --message "Releasing (Travis build: $TRAVIS_BUILD_ID )" --username $SVN_USERNAME --password $SVN_PASSWORD --non-interactive
+svn ci --message "Updating plugin cover and icon images" --username $SVN_USERNAME --password $SVN_PASSWORD --non-interactive
