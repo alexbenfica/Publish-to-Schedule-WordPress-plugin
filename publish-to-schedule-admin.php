@@ -74,20 +74,20 @@ function pts_options_page(){
 		$pts_options = get_option(PTS_OPTION_NAME);
 
 		// Fill up the options array as necessary
-		$pts_options['pts_start'] = $_POST['pts_start']; // like having business hours
-		$pts_options['pts_end'] = $_POST['pts_end'];
+		$pts_options['pts_start'] = htmlspecialchars($_POST['pts_start']); // like having business hours
+		$pts_options['pts_end'] = htmlspecialchars($_POST['pts_end']);
 
-		$pts_options['pts_0'] = $_POST['pts_0'];
-		$pts_options['pts_1'] = $_POST['pts_1'];
-		$pts_options['pts_2'] = $_POST['pts_2'];
-		$pts_options['pts_3'] = $_POST['pts_3'];
-		$pts_options['pts_4'] = $_POST['pts_4'];
-		$pts_options['pts_5'] = $_POST['pts_5'];
-		$pts_options['pts_6'] = $_POST['pts_6'];
+		$pts_options['pts_0'] = htmlspecialchars($_POST['pts_0']);
+		$pts_options['pts_1'] = htmlspecialchars($_POST['pts_1']);
+		$pts_options['pts_2'] = htmlspecialchars($_POST['pts_2']);
+		$pts_options['pts_3'] = htmlspecialchars($_POST['pts_3']);
+		$pts_options['pts_4'] = htmlspecialchars($_POST['pts_4']);
+		$pts_options['pts_5'] = htmlspecialchars($_POST['pts_5']);
+		$pts_options['pts_6'] = htmlspecialchars($_POST['pts_6']);
 
-		$pts_options['pts_infosize'] = $_POST['pts_infosize'];
+		$pts_options['pts_infosize'] = htmlspecialchars($_POST['pts_infosize']);
 
-		$pts_options['pts_allowstats'] = $_POST['pts_allowstats'];
+		$pts_options['pts_allowstats'] = htmlspecialchars($_POST['pts_allowstats']);
 
 
 		# if all weeks are NO... change the monday to YES

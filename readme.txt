@@ -89,6 +89,9 @@ Any other languages... you're welcome! Thank you!
 
 == Changelog ==
 
+= 4.5.5 =
+* Fixing low risk vulnerability
+
 = 4.5.4 =
 * Fixing low risk vulnerability
 * Removing broken links from readme.
