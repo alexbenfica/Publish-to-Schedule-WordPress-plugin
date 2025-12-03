@@ -2,7 +2,7 @@
 Contributors: alexbenfica
 Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, productivity, publish control, schedule post, autopost, autopublish, post later, auto schedule
 Requires at least: 2.8
-Tested up to: 6.1.1
+Tested up to: 6.9
 Stable tag: trunk
 Donate link: https://www.buymeacoffee.com/FQNxAqVUTo
 
@@ -97,6 +97,10 @@ Any other languages... you're welcome! Thank you!
 * Removing broken links from readme.
 * Improving code readability
 * Changed icon and cover to use images created by Stable Diffusion AI
+
+= 4.5.6 =
+* Tested up to WordPress 6.9
+* Updated version for compatibility
 
 = 4.4.2 =
 * Fix error on PHP versions configured as short_open_tag = Off (usually PHP 5.3). This error caused Publish to Schedule to broke sites when installed.
