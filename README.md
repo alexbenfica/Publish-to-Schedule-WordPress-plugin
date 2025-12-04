@@ -1,5 +1,7 @@
-Here you can see more information about this WordPress plugin:
-https://wordpress.org/plugins/publish-to-schedule/
+# Publish to Schedule WordPress Plugin
 
-I'm using Git and GitHub Actions to deploy it to WordPress using SVN.
-Anytime I push to this repository on GitHub the SVN on WordPress will be updated too.
+This repository contains the source code for the Publish to Schedule WordPress plugin.
+
+For more information and downloads, visit: https://wordpress.org/plugins/publish-to-schedule/
+
+The plugin is automatically deployed to WordPress.org via GitHub Actions when version tags are pushed.

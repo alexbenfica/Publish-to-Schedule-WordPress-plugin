@@ -1,12 +1,13 @@
 === Publish to Schedule ===
 Contributors: alexbenfica
-Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, productivity, publish control, schedule post, autopost, autopublish, post later, auto schedule
+Tags: posts, scheduling, auto-schedule, productivity, admin
 Requires at least: 2.8
 Tested up to: 6.9
 Stable tag: trunk
+License: GPL-2.0-or-later
 Donate link: https://www.buymeacoffee.com/FQNxAqVUTo
 
-Say goodbye to the hassle of manually scheduling your WordPress blog posts with Publish to Schedule! With our plugin, you can easily automate your post publishing process, ensuring that your readers receive new content on a consistent and timely basis. No more wasted time trying to figure out the next post date or worrying about maintaining your post frequency.
+Automate your WordPress post scheduling with Publish to Schedule. Set rules for days and times to publish posts automatically, saving you time and ensuring consistent content delivery.
 
 == Description ==
 Looking for a way to streamline your WordPress blog post scheduling? Look no further than Publish to Schedule!
