@@ -93,6 +93,20 @@ Any other languages... you're welcome! Thank you!
 
 == Changelog ==
 
+= 4.5.8 =
+* Complete Portuguese (pt_BR) translations with all missing strings
+* Fix all fuzzy translations for accuracy
+
+= 4.5.7 =
+* Fixed WordPress.org warnings: reduced tags to 5, added license field, shortened short description
+* Update translation files to match current code strings
+
+= 4.5.6 =
+* Tested up to WordPress 6.9
+* Updated version for compatibility
+* Replace Travis CI with GitHub Actions for deployment
+* Improve plugin documentation and donation visibility
+
 = 4.5.5 =
 * Fixing low risk vulnerability
 
