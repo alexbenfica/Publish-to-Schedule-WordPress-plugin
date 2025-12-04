@@ -169,7 +169,7 @@ echo __("I am working on this plugin for 10+ years. <br />Please make a donation
 
 		echo('</div>');
 
-	echo __('Believe-me... even <strong>$'. $howMuch. ' per month</strong> will make me super happy... :)',  'pts');
+	echo __('Believe me... even <strong>$'. $howMuch. ' per month</strong> will make me super happy... :)',  'pts');
 	echo '<br>';
 	echo '<br>';
 
@@ -189,12 +189,12 @@ echo __("I am working on this plugin for 10+ years. <br />Please make a donation
 		}
 		?>
 
-		<h3 style="margin-top:5px;"><?php _e('Which days of week posts are allowed to be auto-scheduled? <br>(The schedule happens only when you click the "Pub. to Schedule" button!)',  'pts')?></h3>
+		<h3 style="margin-top:5px;"><?php _e('Which days of the week posts are allowed to be auto-scheduled? <br>(The schedule happens only when you click the "Pub. to Schedule" button!)',  'pts')?></h3>
 
 		<?php _e('Put 0 in a day when you do not want posts to be scheduled!',  'pts')?>
 
 		<p>
-		<?php _e('Example: if you put 0 on Sunday, this plugin will never schedule a post to be published on Sundays. <br> But still, if you want to schedule an article to be published in a Sunday, just schedule it using the standard schedule button of WordPress and it will be published on the date you choose, ignoring all options below!<br>',  'pts')?>
+		<?php _e('Example: if you put 0 on Sunday, this plugin will never schedule a post to be published on Sundays. <br> But still, if you want to schedule an article to be published on a Sunday, just schedule it using the standard schedule button of WordPress and it will be published on the date you choose, ignoring all options below!<br>',  'pts')?>
 		<br>
 		<?php _e('For each day, set how many posts will be scheduled!',  'pts')?>
 		</p>
@@ -257,7 +257,7 @@ echo __("I am working on this plugin for 10+ years. <br />Please make a donation
 		<h3 style="margin-top:10px;"><?php _e('Specify the time interval in which you want to have your posts scheduled!',  'pts')?></h3>
 
 		<p>
-		<?php _e('Example: posts will only be scheduled to be published in this time interval.<br> But still, if you do via WordPress schedule button, you can schedule for any time you want!',  'pts')?>
+		<?php _e('Example: posts will only be scheduled to be published in this time interval.<br> But still, if you use the WordPress schedule button, you can schedule for any time you want!',  'pts')?>
 		</p>
 
 
@@ -289,12 +289,12 @@ echo __("I am working on this plugin for 10+ years. <br />Please make a donation
 
 		<h3 style="margin-top:20px;">'. __('Your WordPress timezone settings might be incorrect!', 'pts').
 		'</h3>'
-		 . __('The date and time we detect : ') . '<span style="color:blue;font-weight:bold;">'
+		 . __('The date and time we detected: ') . '<span style="color:blue;font-weight:bold;">'
 		.date(get_option('date_format').', '.get_option('time_format'),current_time('timestamp', $gmt = 1)).
 		'</span>';
 
 		/*
-		<p>__("If this is not your local time, you have to ", 'pts') ?> <a title="" href="options-general.php"><?php _e('configure the correct the timezone for your WordPress installation', 'pts') ?></a>. <br>
+		<p>__("If this is not your local time, you have to ", 'pts') ?> <a title="" href="options-general.php"><?php _e('configure the correct timezone for your WordPress installation', 'pts') ?></a>. <br>
 		<?php _e('With wrong time configurations, how can the posts be properly scheduled?', 'pts') ?>
 		<br>
 		<?php _e('If your timezone is right (remember the daylight saving time), you must check the clock with your host.', 'pts') ?>
@@ -317,17 +317,17 @@ echo __("I am working on this plugin for 10+ years. <br />Please make a donation
 		'<br>'
 		. __('The timezone configured in your','pts').' <a target="_blank" href="options-general.php">'.__('WordPress settings','pts').'</a> '.__('is','pts') .': <span style="color:blue;font-weight:bold;">'.get_option('gmt_offset').', </span>'.
 		'<br>'
-		. __('so your server think that is your local time is: ','pts') . ' <span style="color:red;font-weight:bold;">'.date(get_option('date_format').', '.get_option('time_format'),current_time('timestamp', $gmt = 0)).'</span> ... '
-		. __('but this is different from time on you machine now!','pts').
+		. __('so your server thinks your local time is: ','pts') . ' <span style="color:red;font-weight:bold;">'.date(get_option('date_format').', '.get_option('time_format'),current_time('timestamp', $gmt = 0)).'</span> ... '
+		. __('but this is different from the time on your machine now!','pts').
 		'<br>'
-		. __('If the difference is not too big (less than 2h or 3h) you problably will not have side effects and the plugin should work fine!','pts').
+		. __('If the difference is not too big (less than 2h or 3h) you probably will not have side effects and the plugin should work fine!','pts').
 		'<br>'
-		. __('Othewise, with big time differences, you can have issues with the real time that each post will be scheduled!','pts').
+		. __('Otherwise, with big time differences, you can have issues with the real time that each post will be scheduled!','pts').
 		'<br>'
-		. __('Sometimes you have to set a different timezone to compensate daylight saving time or a missconfigured server time! ','pts').
+		. __('Sometimes you have to set a different timezone to compensate daylight saving time or a misconfigured server time! ','pts').
 
 		'<br>'
-		. __('If you can, change the timezone to correct this, refresh this page and this message will be shown anymore!','pts')
+		. __('If you can, change the timezone to correct this, refresh this page and this message will not be shown anymore!','pts')
 		;
 
 
@@ -358,7 +358,7 @@ echo __("I am working on this plugin for 10+ years. <br />Please make a donation
 					echo '<br/>';
 					_e(' I want to see how this plugin works!','pts');
 					echo '<br/>';
-					_e(' (Might be a lot of text! Good for debugging purposes or enthusiats!)', 'pts');
+					_e(' (Might be a lot of text! Good for debugging purposes or enthusiasts!)', 'pts');
 					 ?>
 					 />
 				</td>
