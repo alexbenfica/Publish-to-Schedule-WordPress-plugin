@@ -1,6 +1,6 @@
 === Publish to Schedule ===
 Contributors: alexbenfica
-Tags: posts, scheduling, auto-schedule, productivity, admin
+Tags: posts, scheduling, automation, productivity, post scheduler
 Requires at least: 2.8
 Tested up to: 6.9
 Stable tag: trunk
@@ -19,6 +19,8 @@ With the ability to set specific days of the week, number of posts per day, and 
 Publish to Schedule is perfect for bloggers who want to focus on creating great content, without the hassle of manual scheduling. And with its easy-to-use interface, even those with little technical knowledge can quickly get up and running.
 
 So if you're looking to take your blog to the next level, download Publish to Schedule today and see the difference it can make for your content creation process.
+
+**Support the Development:** If you find this plugin useful, please consider [making a donation](https://www.buymeacoffee.com/FQNxAqVUTo) to support ongoing development and maintenance.
 
 == Installation ==
 
@@ -72,8 +74,9 @@ Yes. You can! I'm available to talk about this! And I can do other plugins too.
 
 = Should I donate? =
 
-You can, if you want. I would like that. It means that my work is valuable for someone else!
-My PayPal account for donations is: alexbenfica@gmail.com
+Yes, please! Your support helps me continue developing and maintaining this plugin. Even a small donation makes a big difference and shows that my work is appreciated. You can donate via Buy Me a Coffee: https://www.buymeacoffee.com/FQNxAqVUTo
+
+Thank you for your generosity!
 
 = Can I translate it? =
 
