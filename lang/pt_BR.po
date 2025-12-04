@@ -120,26 +120,26 @@ msgid ""
 "I am working on this plugin for 10+ years. <br />Please make a donation!<br /"
 ">It is a hell of an incentive for me!"
 msgstr ""
+"Estou trabalhando neste plugin há mais de 10 anos. <br />Por favor faça uma doação!<br /"
+">É um grande incentivo para mim!"
 
 #: publish-to-schedule-admin.php:172
 msgid "Believe me... even <strong>$"
-msgstr ""
+msgstr "Acredite em mim... mesmo <strong>$"
 
 #: publish-to-schedule-admin.php:192
-#, fuzzy
 msgid ""
 "Which days of the week posts are allowed to be auto-scheduled? <br>(The "
 "schedule happens only when you click the \"Pub. to Schedule\" button!)"
 msgstr ""
-"Para quais dias da semana você quer ter artigos agendados? <br>(O "
-"agendamento ocorre apenas quando você clica no botão \"Pub.  p. Agendar\".)"
+"Quais dias da semana os artigos podem ser auto-agendados? <br>(O "
+"agendamento ocorre apenas quando você clica no botão \"Pub. p. Agendar\".)"
 
 #: publish-to-schedule-admin.php:194
 msgid "Put 0 in a day when you do not want posts to be scheduled!"
 msgstr "Coloque 0 em um dia em que você não quer que sejam agendados artigos."
 
 #: publish-to-schedule-admin.php:197
-#, fuzzy
 msgid ""
 "Example: if you put 0 on Sunday, this plugin will never schedule a post to "
 "be published on Sundays. <br> But still, if you want to schedule an article "
@@ -149,9 +149,9 @@ msgid ""
 msgstr ""
 "Exemplo: se você colocar 0 no Domingo, este plugin nunca irá agendar um "
 "artigo para ser publicado em um Domingo. <br>Mas ainda assim, se você quiser "
-"agendar um artigo para ser publicado em um Domingo, simplesmente agende-no "
-"da maneira usual, clicando no botão agendar do WordPress e ele será "
-"publicado na data que você escolher, ignorando todas as opções abaixo."
+"agendar um artigo para ser publicado em um Domingo, simplesmente agende-o "
+"usando o botão de agendamento padrão do WordPress e ele será "
+"publicado na data que você escolher, ignorando todas as opções abaixo!<br>"
 
 #: publish-to-schedule-admin.php:199
 msgid "For each day, set how many posts will be scheduled!"
@@ -164,14 +164,13 @@ msgstr ""
 "Defina o intervalo de horários em que você quer seus artigos agendados!"
 
 #: publish-to-schedule-admin.php:260
-#, fuzzy
 msgid ""
 "Example: posts will only be scheduled to be published in this time interval."
 "<br> But still, if you use the WordPress schedule button, you can schedule "
 "for any time you want!"
 msgstr ""
 "Exemplo: os artigos serão agendados para serem publicados neste intervalo "
-"detempo. <br>Mas se preferir, pode clicar no botão Agendar do WordPress para "
+"de tempo. <br>Mas se preferir, pode usar o botão Agendar do WordPress para "
 "publicar em qualquer outro horário que escolher!"
 
 #: publish-to-schedule-admin.php:266
@@ -191,9 +190,8 @@ msgid " (defaults to 23:59)"
 msgstr "(padrão em 23:59)"
 
 #: publish-to-schedule-admin.php:292
-#, fuzzy
 msgid "The date and time we detected: "
-msgstr "Data e hora detectada:"
+msgstr "A data e hora que detectamos: "
 
 #: publish-to-schedule-admin.php:308
 msgid "Your timezone configuration and server time seems to be OK!"
@@ -220,17 +218,14 @@ msgid "is"
 msgstr "é"
 
 #: publish-to-schedule-admin.php:320
-#, fuzzy
 msgid "so your server thinks your local time is: "
-msgstr "assim, seu servidor web pensa que seu horário local é:"
+msgstr "então seu servidor pensa que seu horário local é: "
 
 #: publish-to-schedule-admin.php:321
-#, fuzzy
 msgid "but this is different from the time on your machine now!"
-msgstr "mas ele é diferente do horário em seu computador agora!"
+msgstr "mas isso é diferente do horário em seu computador agora!"
 
 #: publish-to-schedule-admin.php:323
-#, fuzzy
 msgid ""
 "If the difference is not too big (less than 2h or 3h) you probably will not "
 "have side effects and the plugin should work fine!"
@@ -240,32 +235,29 @@ msgstr ""
 "normalmente!"
 
 #: publish-to-schedule-admin.php:325
-#, fuzzy
 msgid ""
 "Otherwise, with big time differences, you can have issues with the real time "
 "that each post will be scheduled!"
 msgstr ""
-"Por outro lado, com grandes diferenças de horário você poderá ter "
-"divergências com relação ao horário real para o qual seus artigos serão "
-"agendados!"
+"Caso contrário, com grandes diferenças de horário você poderá ter "
+"problemas com relação ao horário real em que cada artigo será "
+"agendado!"
 
 #: publish-to-schedule-admin.php:327
-#, fuzzy
 msgid ""
 "Sometimes you have to set a different timezone to compensate daylight saving "
 "time or a misconfigured server time! "
 msgstr ""
-"Não é incomum que você precise escolher um timezone diferente do seu real "
-"para compensar o horário de verão ou a hora errada do seu servidor web!"
+"Às vezes você precisa definir um timezone diferente para compensar o horário "
+"de verão ou um horário mal configurado do servidor! "
 
 #: publish-to-schedule-admin.php:330
-#, fuzzy
 msgid ""
 "If you can, change the timezone to correct this, refresh this page and this "
 "message will not be shown anymore!"
 msgstr ""
-"Se for possível, altere a a sua configuração de timezone para corrigir isto, "
-"atualize a página e você não verá mais esta mensagem!"
+"Se puder, altere o timezone para corrigir isso, atualize esta página e esta "
+"mensagem não será mais exibida!"
 
 #: publish-to-schedule-admin.php:351
 msgid ""
@@ -284,9 +276,8 @@ msgid " I want to see how this plugin works!"
 msgstr "Eu quero ver como este plugin funciona!"
 
 #: publish-to-schedule-admin.php:361
-#, fuzzy
 msgid " (Might be a lot of text! Good for debugging purposes or enthusiasts!)"
-msgstr "(Pode ser muito texto! Bom para debugar e para entusiastas!)"
+msgstr " (Pode ser muito texto! Bom para debug e para entusiastas!)"
 
 #: publish-to-schedule-admin.php:370
 msgid " Just do the magic!"
