@@ -22,7 +22,7 @@ add_action('add_meta_boxes', 'pts_post_metabox');
 
 
 
-# Show data on sidebar from publish to schedule plugin, now compatible with Guttenberg!
+# Show data on sidebar from publish to schedule plugin, now compatible with Gutenberg!
 function pts_post_metabox_callback($post){
     ?>
     <div id="pts_post_metabox">

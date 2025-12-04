@@ -2,7 +2,7 @@
 /*
 Plugin Name: Publish to Schedule
 Plugin URI: https://wordpress.org/extend/plugins/publish-to-schedule/
-Description: Just write! Let this plugins AUTO-schedule all posts for you! Configure once, use forever!
+Description: Just write! Let this plugin's AUTO-schedule all posts for you! Configure once, use forever!
 Version: 4.5.6
 Author: Alex Benfica
 Author URI: https://www.buymeacoffee.com/FQNxAqVUTo
@@ -25,19 +25,19 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 
-# Named used to save the plugin option array to database
+# Name used to save the plugin option array to database
 define('PTS_OPTION_NAME', 'publish-to-schedule');
 
-# useful for translating, where you can create a .po file from .php file.
+# Useful for translating, where you can create a .po file from .php file.
 # POEdit not working very well...
 # http://www.icanlocalize.com/tools/php_scanner
-# load domains for translations from english...
+# Load domains for translations from English...
 load_textdomain('pts', dirname(__FILE__).'/lang/' . get_locale() . '.mo');
 
 $plName = 'Publish to Schedule';
 $plUrl = 'https://wordpress.org/extend/plugins/publish-to-schedule/';
 
-# toggle debug
+# Toggle debug
 $pts_debug = False;
 
 $pts_show_donate = True;
